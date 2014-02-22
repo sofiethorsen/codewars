@@ -35,16 +35,16 @@ body {
 }
 
 .scores {
-  position: absolute;
-  left: 450px;
   color: white;
   font-size: 40px;
 }
 
 .scores .player1 {
+  float: left;
 }
 
 .scores .player2 {
+  float: right;
 }
 
 #left{
