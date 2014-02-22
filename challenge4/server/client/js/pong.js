@@ -59,8 +59,29 @@ function refresh(data) {
 };
 
 $(document).ready(function() {
-    var socket = io.connect('http://localhost');
+    waiting = $('#waiting');
+    menu = $('#menu');
+
+    $('#singleplayer').on('click', function() {
+        socket.emit('newGameMode', 'singleplayer');
+
+        menu.addClass('hide');
+        waiting.removeClass('hide');
+    });
+
+    $('#multiplayer').on('click', function() {
+        socket.emit('newGameMode', 'multiplayer');
+
+        menu.addClass('hide');
+        waiting.removeClass('hide');
+    });
+
     socket.on('update', function(data) {
+        waiting.addClass('hide');
+        game = $('.menu');
+        if(game.hasClass('hide')) {
+          game.removeClass('hide');
+        };
         refresh(data);
     });
 
