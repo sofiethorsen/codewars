@@ -50,14 +50,11 @@ module.exports = function (options) {
   var GAME_AREA_TOP = 150;
   var GAME_AREA_BOTTOM = 400;
   
-
   var topLeftLine     = function(x) { return GAME_AREA_TOP    + -3*x; };
   var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + 3*x; };
-  
   var toprightLine    = function(x) { return GAME_AREA_TOP    + -3*(constants.WIDTH-x); };
   var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + 3*(constants.WIDTH-x); };
-
-    
+  
 
   var _update = function () {
     x += speedX;
@@ -72,12 +69,12 @@ module.exports = function (options) {
     if (ball_mid_x < half) {
       var yTop = topLeftLine(ball_mid_x);
       if (ball_mid_y < yTop) {
-        speedY *= -1
+        speedY *= -1;
         console.log("collides topLeftLine");
       }
       var yBot = bottomLeftLine(ball_mid_x);
       if (ball_mid_y > yBot) {
-        speedY *= -1
+        speedY *= -1;
         console.log("collides bottomLeftLine");
       }
     }
@@ -85,12 +82,12 @@ module.exports = function (options) {
     else {
       var yTop = toprightLine(ball_mid_x);
       if (ball_mid_y < yTop) {
-        speedY *= -1
+        speedY *= -1;
         console.log("collides toprightLine");
       }
       var yBot = bottomrightLine(ball_mid_x);
       if (ball_mid_y > yBot) {
-        speedY *= -1
+        speedY *= -1;
         console.log("collides bottomrightLine");
       }
     }
