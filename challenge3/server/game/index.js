@@ -11,7 +11,16 @@ var PADDLE_SPEED = 10;
 var paddle_left = Paddle("left");
 var paddle_right = Paddle("right");
 
-var ball = Ball();
+var ball = Ball({
+  callback: function(direction) {
+    if (direction === "right") {
+      player.addScore();
+    }
+    if (direction === "left") {
+      bot.addScore();
+    }
+  }
+});
 
 function Player(options) {
   var paddle = options.paddle;
@@ -22,6 +31,16 @@ function Player(options) {
     _direction = data.direction;
   });
 
+  var score = 0;
+
+  var addScore = function() {
+    score++;
+  };
+
+  var getScore = function() {
+    return score;
+  };
+
   _update = function(time) {};
 
   var direction = function () { return _direction }
@@ -31,6 +50,8 @@ function Player(options) {
     update : _update,
     paddle: paddle,
     socket: socket,
+    getScore: getScore,
+    addScore: addScore
   }
 }
 
@@ -40,6 +61,15 @@ function Bot(options) {
   var latest_move_at = lib.unixTime();
   var max_move = HEIGHT/10;
   var _direction = "none";
+  var score = 0;
+
+  var addScore = function() {
+    score++;
+  };
+
+  var getScore = function() {
+    return score;
+  };
 
   _update = function(time) {
     if (lib.unixTime() - latest_move_at < 333) {
@@ -68,12 +98,14 @@ function Bot(options) {
     latest_move_at = lib.unixTime();
   }
 
-  var direction = function () { return _direction }
+  var direction = function () { return _direction; };
 
   return {
     direction : direction,
     update : _update,
-    paddle: paddle
+    paddle: paddle,
+    getScore: getScore,
+    addScore: addScore
   }
 
 }
@@ -88,7 +120,6 @@ function Paddle(side) {
             return PADDLE_HEIGHT;
         },
         setDirection: function(dir) {
-
             if (dir === "up") {
                 direction = -1;
             } else if (dir === "down") {
@@ -96,8 +127,6 @@ function Paddle(side) {
             } else {
                 direction = 0;
             }
-
-
         },
         update: function() {
             top += direction * PADDLE_SPEED;
@@ -151,7 +180,9 @@ function sendState() {
     paddle_right : {
       x: paddle_right.left(),
       y: paddle_right.top()
-    }
+    },
+    score_left : player.getScore(),
+    score_right : bot.getScore()
   }
 
   player.socket.emit('update', data);
@@ -176,5 +207,4 @@ function updateGame() {
 setInterval(function() {
   if (player === null) return;
   updateGame();
-
-}, 300);
+}, 50);

@@ -1,10 +1,11 @@
 lib = require('./lib');
 var WIDTH = 1000;
 var HEIGHT = 500;
-module.exports = function (argument) {
+module.exports = function (options) {
   var BALL_WIDTH = 25;
   var BALL_HEIGHT = 25;
 
+  var callback = options.callback;
   var speedX, speedY, x, y;
 
   function resetBall() {
@@ -45,15 +46,16 @@ module.exports = function (argument) {
 
     if (x === 0) {
       resetBall();
-      console.log("someone lost")
+      callback("left");
     }
     if (x === (WIDTH-BALL_WIDTH)) {
       resetBall();
-      console.log("someone lost")
+      callback("right");
     }
   };
 
   return {
+    resetBall: resetBall,
     get: _get,
     update: _update,
     top: top,
