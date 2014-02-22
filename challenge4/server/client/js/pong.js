@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     socket.on('update', function(data) {
         waiting.addClass('hide');
-        game = $('.menu');
+        game = $('#game');
         if(game.hasClass('hide')) {
           game.removeClass('hide');
         };
