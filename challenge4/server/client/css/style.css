@@ -56,6 +56,8 @@ body {
 }
 
 #waiting {
+  text-align: center;
+  padding-top: 220px;
   color: white;
 }
 
