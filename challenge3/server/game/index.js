@@ -1,8 +1,6 @@
 lib = require('./lib');
 Ball = require('./ball');
 
-console.log(Ball);
-
 var PADDLE_WIDTH = 20;
 var PADDLE_HEIGHT = 50;
 var PADDLE_SPEED = 10;
@@ -28,7 +26,8 @@ function Player(options) {
   return {
     direction : _direction,
     update : _update,
-    paddle: paddle
+    paddle: paddle,
+    socket: socket,
   }
 }
 
@@ -62,7 +61,7 @@ function Bot(options) {
       direction = "none";
     }
 
-    latest_move_at = unixTime();
+    latest_move_at = lib.unixTime();
   }
 
   return {
@@ -126,10 +125,28 @@ function resetGame (socket) {
 
 exports.setPlayer = function(socket) {
   resetGame(socket);
-
-
-  // data.id, data.direction
 };
+
+
+function sendState() {
+
+  data = {
+    ball : {
+      x: ball.left(),
+      y: ball.top()
+    },
+    paddle_left : {
+      x: paddle_left.left(),
+      y: paddle_left.top()
+    },
+    paddle_right : {
+      x: paddle_right.left(),
+      y: paddle_right.top()
+    }
+  }
+
+  player.socket.emit('update', data);
+}
 
 function updateGame() {
   player.update();
@@ -141,12 +158,12 @@ function updateGame() {
   paddle_left.update();
   paddle_right.update();
 
-  // sendstate
+  sendState();
 }
 
 // Main loop.
 setInterval(function() {
   if (player === null) return;
   updateGame();
-  player.socket.emit('update', state);
-}, 1000);
+  
+}, 300);
