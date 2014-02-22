@@ -3,6 +3,7 @@ Ball = require('./ball');
 Player = require('./player');
 Bot = require('./bot');
 Paddle = require('./paddle');
+Block = require('./block');
 
 
 
@@ -12,6 +13,7 @@ module.exports = function(options) {
   var player_left = null;
   var player_right = null;
   var game_loop = null;
+  var blocks = [];
 
   var ball = Ball({
     callback: function(direction) {
@@ -36,6 +38,20 @@ module.exports = function(options) {
   }
 
   function sendState() {
+
+
+    blocks_data = [];
+
+    for (var i = blocks.length - 1; i >= 0; i--) {
+      blocks_data.add({
+        x : blocks[i].left(),
+        y : blocks[i].top(),
+        width : blocks[i].width(),
+        height : blocks[i].height(),
+        visable : blocks[i].visable()
+      })
+    };
+
     data = {
       ball : {
         x: ball.left(),
@@ -50,7 +66,8 @@ module.exports = function(options) {
         y: player_right.paddle.top()
       },
       score_left : player_left.getScore(),
-      score_right : player_right.getScore()
+      score_right : player_right.getScore(),
+      blocks : blocks_data
     };
 
     sendToPlayers("update", data);
@@ -68,6 +85,14 @@ module.exports = function(options) {
     ball.collide(player_left.paddle);
     ball.collide(player_right.paddle);
 
+    for (var i = blocks.length - 1; i >= 0; i--) {
+      var bl = blocks[i];
+      if (bl.collide(ball)) {
+        bl.hide();
+        ball.hitBlock();
+      }
+    };
+
     player_left.paddle.update();
     player_right.paddle.update();
 
@@ -77,6 +102,7 @@ module.exports = function(options) {
   // Main loop.
   function start() {
     console.log("start")
+    blocks.add( new Block({top : 100, left : 200}));
     game_loop = setInterval(function() {
       if (player_left === null) return;
       updateGame();

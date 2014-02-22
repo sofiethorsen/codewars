@@ -34,6 +34,10 @@ module.exports = function (options) {
     speedX = -speedX;
   };
 
+  var hitBlock = function() {
+    speedX = -speedX;
+  };
+
   var _get = function() {
     return { x: x, y: y };
   };
@@ -185,6 +189,7 @@ module.exports = function (options) {
     bottom: bottom,
     width: width,
     height: height,
-    collide: collide
+    collide: collide,
+    hitBlock: hitBlock
   };
 }
