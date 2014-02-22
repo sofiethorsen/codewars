@@ -81,6 +81,12 @@ $(document).ready(function() {
 
         window.requestAnimationFrame(loop);
     });
+
+    var ball = Ball($("#ball"));
+
+    setInterval(function () {
+        ball.update();
+    }, 100);
 });
 
 
