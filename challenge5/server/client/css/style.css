@@ -55,6 +55,15 @@ body {
   border-left: 3px dashed white;
 }
 
+.blocks {
+
+  .block1 {
+    background-color: red;
+    width: 5px;
+    height: 10px;
+  }
+}
+
 #menu {
   z-index: 1;
   top: -15;
