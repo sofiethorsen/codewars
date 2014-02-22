@@ -24,7 +24,7 @@ module.exports = function (side) {
         },
         update: function() {
             top += direction * PADDLE_SPEED;
-            top = Math.max(Math.min(500 - this.height(), top), 0);
+            top = Math.max(Math.min(constants.GAME_AREA_BOTTOM - this.height(), constants.GAME_AREA_TOP), 0);
         },
         top: function() { return top; },
         bottom: function() { return top + PADDLE_HEIGHT; },
