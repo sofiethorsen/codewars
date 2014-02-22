@@ -24,8 +24,10 @@ function Player(options) {
 
   _update = function(time) {};
 
+  var direction = function () { return _direction }
+
   return {
-    direction : _direction,
+    direction : direction,
     update : _update,
     paddle: paddle,
     socket: socket,
@@ -59,14 +61,17 @@ function Bot(options) {
       _direction = "down";
     }
     else {
-      direction = "none";
+      _direction = "none";
     }
+
 
     latest_move_at = lib.unixTime();
   }
 
+  var direction = function () { return _direction }
+
   return {
-    direction : _direction,
+    direction : direction,
     update : _update,
     paddle: paddle
   }
@@ -82,14 +87,17 @@ function Paddle(side) {
         height: function() {
             return PADDLE_HEIGHT;
         },
-        setDirection: function(direction) {
-            if (direction == "up") {
+        setDirection: function(dir) {
+            
+            if (dir === "up") {
                 direction = -1;
-            } else if (direction == "down") {
+            } else if (dir === "down") {
                 direction = 1;
             } else {
                 direction = 0;
             }
+
+
         },
         update: function() {
             top += direction * PADDLE_SPEED;
@@ -155,8 +163,8 @@ function updateGame() {
 
   ball.update();
 
-  paddle_left.setDirection(player.direction);
-  paddle_right.setDirection(bot.direction);
+  paddle_left.setDirection(player.direction());
+  paddle_right.setDirection(bot.direction());
 
   paddle_left.update();
   paddle_right.update();
