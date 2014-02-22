@@ -49,7 +49,7 @@ module.exports = function(options) {
         y : blocks[i].top(),
         width : blocks[i].width(),
         height : blocks[i].height(),
-        visable : blocks[i].visable()
+        visible : blocks[i].visible()
       })
     };
 
@@ -103,9 +103,9 @@ module.exports = function(options) {
   // Main loop.
   function start() {
     console.log("start")
-    blocks.push( new Block({top : 150, left : 250}));
+    //blocks.push( new Block({top : 150, left : 250}));
     for (var i = 0; i < 5; i++) {
-      blocks.push( new Block({top : 150 + (constants.BLOCK_HEIGHT + 10) * i, left : 250}));
+      blocks.push(Block({top : 150 + (constants.BLOCK_HEIGHT + 10) * i, left : 250}));
     }
     game_loop = setInterval(function() {
       if (player_left === null) return;

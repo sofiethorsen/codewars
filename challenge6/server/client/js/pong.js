@@ -58,7 +58,7 @@ function refresh(data) {
         //document.getElementsByTagName('game')[0].appendChild(blocksDiv);
 
         blocks.forEach(function(block){
-            if (block.visable) {
+            if (block.visible) {
                 var elem = $('<div class="block"/>');
                 elem.css({top: block.y, left: block.x, width: block.width, height: block.height});
                 //$(block.name).css({top: block.top, left: block.left, width: block.width, height: block.height});
