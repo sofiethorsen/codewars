@@ -24,6 +24,9 @@ function Ball(node, paddleHitCallback) {
     y = 250;
     speedX = random() * 5;
     speedY = random() * 5;
+    // Speed should be at least 5
+    speedX =+ sign(speedX) * 5;
+    speedY =+ sign(speedY) * 5;
   };
 
   var hitPaddle = function(direction) {
@@ -46,10 +49,20 @@ function Ball(node, paddleHitCallback) {
 
       var diff = top_paddle-top_ball;
       diff = diff*-1;
-      var section = diff%8;
+      var section = diff % (paddle.node.height() / 8);
+
+      var move = (section - 3) / 3
+
+      if (move < 0) {
+        speedX += speedY * -move;
+        speedY -= speedY * -move;
+      } else if (move > 0) {
+        speedX -= speedY * move;
+        speedY += speedY * move;
+      }
 
 
-      console.log("DIFF", section)
+      console.log("DIFF", move);
 
 
 
