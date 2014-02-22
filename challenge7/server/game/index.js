@@ -103,11 +103,11 @@ module.exports = function(options) {
       balls[i].collide(player_left.paddle);
       balls[i].collide(player_right.paddle);
 
-      for (var i = blocks.length - 1; i >= 0; i--) {
-        if (blocks[i].collides(ball)) {
-          blocks[i].hide();
-          ball.hitBlock(blocks[i]);
-          if (blocks[i].special) {
+      for (var j = blocks.length - 1; j >= 0; j--) {
+        if (blocks[j].collides(balls[i])) {
+          blocks[j].hide();
+          balls[i].hitBlock(blocks[j]);
+          if (blocks[j].special) {
             balls.push(createBall());
           }
         }
@@ -139,7 +139,7 @@ module.exports = function(options) {
       var paddle_right = Paddle("right");
 
       player_left = Player({socket : socket, paddle: paddle_left});
-      player_right = Bot({paddle: paddle_right, ball: ball});
+      player_right = Bot({paddle: paddle_right, balls: balls});
       start();
     }
     else if (mode === "multiplayer") {
