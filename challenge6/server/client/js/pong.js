@@ -48,7 +48,8 @@ function refresh(data) {
         //gameDiv = document.getElementById('game');
         //var blockDiv = document.getElementById('blocks');
 
-        $("#game").remove(".block");
+
+        $("div.block").remove()
 
         //gameDiv.removeChild(blockDiv)
         //blockDiv.parentNode.removeChild(blockDiv)
@@ -73,7 +74,6 @@ function refresh(data) {
     var leftScore = data.score_left;
     var rightScore = data.score_right;
 
-    console.log(left);
     $("#ball").css({top: ball.y, left: ball.x});
     $("#left").css({top: left.y, left: left.x});
     $("#right").css({top: right.y, left: right.x});

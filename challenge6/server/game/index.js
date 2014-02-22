@@ -87,10 +87,9 @@ module.exports = function(options) {
     ball.collide(player_right.paddle);
 
     for (var i = blocks.length - 1; i >= 0; i--) {
-      var bl = blocks[i];
-      if (bl.collides(ball)) {
-        bl.hide();
-        ball.hitBlock(bl);
+      if (blocks[i].collides(ball)) {
+        blocks[i].hide();
+        ball.hitBlock(blocks[i]);
       }
     };
 
