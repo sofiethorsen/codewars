@@ -72,14 +72,12 @@ module.exports = function (options) {
     if (ball_mid_x < half) {
       var yTop = topLeftLine(ball_mid_x);
       if (ball_mid_y < yTop) {
-        speedX = 0
-        speedY = 0
+        speedY *= -1
         console.log("collides topLeftLine");
       }
       var yBot = bottomLeftLine(ball_mid_x);
       if (ball_mid_y > yBot) {
-        speedX = 0
-        speedY = 0
+        speedY *= -1
         console.log("collides bottomLeftLine");
       }
     }
@@ -87,14 +85,12 @@ module.exports = function (options) {
     else {
       var yTop = toprightLine(ball_mid_x);
       if (ball_mid_y < yTop) {
-        speedX = 0
-        speedY = 0
+        speedY *= -1
         console.log("collides toprightLine");
       }
       var yBot = bottomrightLine(ball_mid_x);
       if (ball_mid_y > yBot) {
-        speedX = 0
-        speedY = 0
+        speedY *= -1
         console.log("collides bottomrightLine");
       }
     }
