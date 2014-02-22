@@ -22,9 +22,13 @@ function Ball(node, paddleHitCallback) {
   var resetPosition = function() {
     x = 500;
     y = 250;
+    speedX = random() * 5;
+    speedY = random() * 5;
   };
 
   var hitPaddle = function(direction) {
+    speedX *= 1.2;
+    speedY *= 1.2;
     speedX = -speedX;
     // speedY = speedY + direction;
   };
@@ -38,23 +42,14 @@ function Ball(node, paddleHitCallback) {
     if (o.targets.length > 0) {
 
       var top_ball = node.position().top;
-      var top_paddle = paddle.node.position().top + node.height();
-
-      // var top = top_paddle ;
-
-
-
-      // var bottom = top_paddle - paddle.node.height();
-
-
-
-      
-
-
+      var top_paddle = paddle.node.position().top - node.height();
 
       var diff = top_paddle-top_ball;
+      diff = diff*-1;
+      var section = diff%8;
 
-      console.log("DIFF", top_paddle, top_ball, diff)
+
+      console.log("DIFF", section)
 
 
 
