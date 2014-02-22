@@ -35,6 +35,8 @@ body {
 }
 
 #menu {
+  text-align: center;
+  padding-top: 200px;
   color: white;
 }
 
@@ -44,10 +46,12 @@ body {
 
 #menu div {
   width: 200px;
-  height: 200px;
-  padding-top: 200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+#menu .entry:hover {
+  background-color: grey;
 }
 
 #waiting {
