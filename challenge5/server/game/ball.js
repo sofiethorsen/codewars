@@ -57,10 +57,35 @@ module.exports = function (options) {
   var toprightLine    = function(x) { return GAME_AREA_TOP    + -(0.577)*(constants.WIDTH-x); };
   var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + (0.577)*(constants.WIDTH-x); };
 
+  var length = function(x, y) {
+    return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+  };
+
+  var degree = function(x, y) {
+    return Math.atan(y, x);
+  };
+
+  var vector = function (degree, length) {
+    console.log(Math.asin(degree), length);
+    return {
+      x : Math.acos(degree)*length,
+      y : Math.asin(degree)*length
+    }
+  }
 
   var _update = function () {
     x += speedX;
     y += speedY;
+
+
+    d = degree(x, y);
+    l = degree(x, y);
+
+    v = vector(d, l);
+
+    console.log(x, y, v);
+
+
 
     var ball_mid_x = x + this.width()/2;
     var ball_mid_y = y + this.height()/2;
