@@ -101,14 +101,16 @@ module.exports = function(options) {
 
     for (var i = balls.length - 1; i >= 0; i--) {
       balls[i].update();
+      if (balls[i] === undefined || balls[i] == null) return;
       balls[i].collide(player_left.paddle);
       balls[i].collide(player_right.paddle);
 
       for (var j = blocks.length - 1; j >= 0; j--) {
+        if (blocks[j] === undefined || blocks[j] == null) return;
         if (blocks[j].collides(balls[i])) {
           blocks[j].hide();
           balls[i].hitBlock(blocks[j]);
-          if (blocks[j].special) {
+          if (blocks[j].special()) {
             balls.push(createBall());
           }
         }
