@@ -8,8 +8,10 @@ module.exports = function (options) {
   var latestLineHit = null;
 
   function resetBall() {
-    x = constants.WIDTH/2;
-    y = constants.HEIGHT/2;
+    //x = constants.WIDTH/2;
+    //y = constants.HEIGHT/2;
+    x = constants.WIDTH / 2;
+    y = 20;
     speedX = lib.random() * 5;
     speedY = lib.random() * 5;
     // Speed should be at least 5
