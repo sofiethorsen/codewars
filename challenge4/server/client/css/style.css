@@ -50,14 +50,6 @@ body {
   margin-right: auto;
 }
 
-#waiting {
-  display: none;
-}
-
-#game {
-  display: none
-}
-
 .hide {
   display: none;
 }
