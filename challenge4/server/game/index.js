@@ -67,6 +67,7 @@ module.exports = function(options) {
 
   // Main loop.
   function start() {
+    console.log("start")
     setInterval(function() {
       if (player_left === null) return;
       updateGame();
@@ -83,15 +84,28 @@ module.exports = function(options) {
       start();
     }
     else if (mode === "multiplayer") {
-      if (player_left !== null && player_left !== undefined) {
+      console.log("multiplayer");
+      if (player_left === null) {
+        console.log("first player");
         var paddle_left = Paddle("left");
         player_left = Player({socket : socket, paddle: paddle_left});
       }
       else {
+        console.log("second player");
         var paddle_right = Paddle("right");
         player_right = Player({socket : socket, paddle: paddle_right});
         start();
       }
+        
+
+      //   
+      //   
+      // }
+      // else {
+      //   
+      //   
+      //   
+      // }
     }
 
   };
