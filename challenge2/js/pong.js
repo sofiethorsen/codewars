@@ -18,7 +18,7 @@ Bot = function (options) {
 
         var paddle_mid = paddle.node.position().top + paddle.node.height()/2;
         var ball_mid = ball.node.position().top + ball.node.height()/2;
-        var move = ball_mid-paddle_mid;
+        var move = ball_mid-paddle_mid + ball.ySpeed() * (60 / 3);
         console.log(paddle_mid, ball_mid);
         move = Math.min(Math.max(move, -max_move), max_move);
 
@@ -148,11 +148,12 @@ $(document).ready(function() {
         };
     });
 
-    bot = Bot({ball : ball});
+    bot1 = Bot({ball : ball});
+    bot2 = Bot({ball : ball});
 
-    player1 = Player({name: 'Player 1', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}, updatePlayer); // a - up, z - down
+    player1 = Player({name: 'Player 1', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}, bot1.move); // a - up, z - down
     //player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}, updatePlayer); // up/down arrows
-    player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}, bot.move); // up/down arrows
+    player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}, bot2.move); // up/down arrows
 
 
     window.requestAnimationFrame(function loop(time) {

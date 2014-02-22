@@ -93,6 +93,9 @@ function Ball(node, paddleHitCallback) {
   return {
     update : update,
     collied : collied,
-    node: node
+    node: node,
+    ySpeed: function () {
+      return speedY;
+    }
   };
 };
