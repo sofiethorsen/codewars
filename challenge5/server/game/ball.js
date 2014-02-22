@@ -108,7 +108,7 @@ module.exports = function (options) {
       resetBall();
       callback("left");
     }
-    if (x === (constants.WIDTH-constants.BALL_WIDTH)) {
+    if (x === (constants.WIDTH-this.width())) {
       resetBall();
       callback("right");
     }

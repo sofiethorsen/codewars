@@ -16,17 +16,14 @@ module.exports = function (options) {
     return score;
   };
 
-  _update = function(time) {
+  var _update = function(time) {
     if (lib.unixTime() - latest_move_at < 333) {
         return; //yield
     }
-
     var paddle_mid = paddle.top() + paddle.height()/2;
     var ball_mid = ball.top() + ball.height()/2;
     var move = ball_mid - paddle_mid; // + ball.ySpeed() * (60 / 3);
-
     move = Math.min(Math.max(move, -max_move), max_move);
-
 
     if (move < 0) {
       _direction = "up";
@@ -37,7 +34,6 @@ module.exports = function (options) {
     else {
       _direction = "none";
     }
-
 
     latest_move_at = lib.unixTime();
   }
@@ -51,5 +47,4 @@ module.exports = function (options) {
     getScore: getScore,
     addScore: addScore
   };
-
 }
