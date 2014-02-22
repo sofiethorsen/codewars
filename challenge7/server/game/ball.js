@@ -193,11 +193,11 @@ module.exports = function (options) {
 
     if (x < 0) {
       resetBall();
-      callback("left");
+      callback(this, "left");
     }
     if (x > (constants.WIDTH-this.width())) {
       resetBall();
-      callback("right");
+      callback(this, "right");
     }
   };
 

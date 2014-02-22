@@ -45,42 +45,37 @@ var Paddle = function(node) {
 
 function refresh(data) {
     function _redrawBlocks(blocks) {
-        //gameDiv = document.getElementById('game');
-        //var blockDiv = document.getElementById('blocks');
-
-
         $("div.block").remove()
-
-        //gameDiv.removeChild(blockDiv)
-        //blockDiv.parentNode.removeChild(blockDiv)
-
-        //var new_blocksDiv = document.createElement('div');
-        //blocksDiv.id = 'blocks';
-        //document.getElementsByTagName('game')[0].appendChild(blocksDiv);
-
         blocks.forEach(function(block){
             if (block.visible) {
                 var elem = $('<div class="block"/>');
                 elem.css({top: block.y, left: block.x, width: block.width, height: block.height});
-                //$(block.name).css({top: block.top, left: block.left, width: block.width, height: block.height});
                 $("#game").append(elem);
             }
         });
     };
 
-    var ball = data.ball;
+    function _redrawBalls(balls) {
+        $('div.ball').remove()
+        balls.forEach(function(ball){
+            var elem = $('<div class="ball"/>');
+            elem.css({top: ball.y, left: ball.x});
+            $("#game").append(elem);
+        });
+    }
+
     var left = data.paddle_left;
     var right = data.paddle_right;
     var leftScore = data.score_left;
     var rightScore = data.score_right;
 
-    $("#ball").css({top: ball.y, left: ball.x});
     $("#left").css({top: left.y, left: left.x});
     $("#right").css({top: right.y, left: right.x});
     $('.left-scoreboard').html(leftScore);
     $('.right-scoreboard').html(rightScore);
 
     _redrawBlocks(data.blocks);
+    _redrawBalls(data.balls);
 
 };
 
