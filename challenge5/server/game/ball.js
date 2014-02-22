@@ -52,7 +52,7 @@ module.exports = function (options) {
   };
 
   var GAME_AREA_TOP = 150;
-  var GAME_AREA_BOTTOM = 300;
+  var GAME_AREA_BOTTOM = 400;
   
 
   var topLeftLine     = function(x) { return GAME_AREA_TOP    + -3*x; };
