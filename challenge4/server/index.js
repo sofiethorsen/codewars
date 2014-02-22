@@ -1,7 +1,7 @@
 var express = require('express');
 
 
-var game = require('./game/index.js');
+var Game = require('./game/index.js');
 
 var app = express()
   , server = require('http').createServer(app)
@@ -19,13 +19,37 @@ app.get('/', function (req, res) {
 
 
 
-var g = null;
+
+
+var waiting_game = null;
 io.sockets.on('connection', function (socket) {
-  if (g == null) {
-    console.log("NEW GAME")
-    g = game({mode : "multiplayer" });  
-  } else {
-    console.log("GAME exists");
-  }
-  g.addPlayer(socket);
+  var game;
+
+  socket.on("disconnect", function() {
+    game.stop();
+  });
+
+  socket.on("newGameMode", function (mode) {
+    if (mode === "singelplayer") {
+      console.log("NEW GAME")
+      game = new Game({mode : "singelplayer" }); 
+    }
+
+    if (mode === "multiplayer") {
+      if (waiting_game == null) {
+        console.log("NEW GAME")
+        game = new Game({mode : "multiplayer" });
+        waiting_game = game;
+      }
+      else {
+        console.log("GAME exists");
+        game = waiting_game;
+        waiting_game = null;
+      }
+    }
+
+   game.addPlayer(socket);
+  
+  });
+
 });
