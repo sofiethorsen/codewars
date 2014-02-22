@@ -3,7 +3,8 @@ Player = function(options) {
     var KEY_UP = options.keyUp;
     var KEY_DOWN = options.keyDown;
     var score = 0;
-    var direction = 0;
+    var up = false;
+    var down = false;
 
     init = function() {
         controls();
@@ -12,31 +13,37 @@ Player = function(options) {
     controls = function() {
         document.addEventListener('keyup', function(event) {
             if(event.keyCode == KEY_UP) {
-                direction = 0;
+                up = false;
             } else if(event.keyCode == KEY_DOWN) {
-                direction = 0;
+                down = false;
             }
         });
         document.addEventListener('keydown', function(event) {
             if(event.keyCode == KEY_UP) {
-                direction = -1;
+                up = true;
             } else if(event.keyCode == KEY_DOWN) {
-                direction = 1;
+                down = true;
             }
         });
     };
 
     _score = function() {
         return score;
-    }
+    };
 
     _updateScore = function() {
         return score += 1;
     };
 
     _direction = function() {
-        return direction;
-    }
+        if (up == down) {
+            return 0;
+        } else if (up) {
+            return -1;
+        } else {
+            return 1;
+        }
+    };
 
     init();
 
