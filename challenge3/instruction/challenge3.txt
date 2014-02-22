@@ -1,0 +1,15 @@
+Create a client-server game where a human player plays against a bot player.
+
+1) Create a simple server (http, for example) which simulates the game.
+
+2) The server should know where ball and paddles are and move them according to speed and direction or input. 
+
+3) The server should be able to be polled at least four times a second about ball and paddle positions.
+
+4) Move the bot logic into the server so that it can play against a human player on the client.
+
+5) Remove the game logic in the client with client logic which polls the server and displays current positions of ball, paddles and points.
+
+6) Make the client render ball, paddles and players points polled from the server.
+
+7) From this point on, all challenges implies this client-server, so additions to the protocol will become nesessary even if they are not explicitly stated.
