@@ -40,6 +40,20 @@ function Paddle(side) {
         update: function() {
             top += direction * PADDLE_SPEED;
             top = Math.min(500 - this.height(), top);
+        },
+        top: function() { return top; },
+        bottom: function() { return top + PADDLE_HEIGHT; },
+        left: function() { return left; },
+        right: function() { return left + PADDLE_WIDTH; },
+        collides: function(ball) {
+            if (!(this.right() < ball.left() ||
+                  this.left() > ball.right() ||
+                  this.bottom() < ball.top() ||
+                  this.top() > ball.bottom())) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
     };
