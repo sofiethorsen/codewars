@@ -96,16 +96,7 @@ module.exports = function(options) {
         player_right = Player({socket : socket, paddle: paddle_right});
         start();
       }
-        
-
-      //   
-      //   
-      // }
-      // else {
-      //   
-      //   
-      //   
-      // }
+      
     }
 
   };
