@@ -3,18 +3,11 @@ lib = require('./lib');
 module.exports = function (options) {
   var paddle = options.paddle;
   var balls = options.balls;
+  
   var latest_move_at = lib.unixTime();
   var max_move = 50;
   var _direction = "none";
   var score = 0;
-
-  var addScore = function() {
-    score++;
-  };
-
-  var getScore = function() {
-    return score;
-  };
 
   var _update = function(time) {
     if (lib.unixTime() - latest_move_at < 333) {
@@ -44,7 +37,7 @@ module.exports = function (options) {
     direction : direction,
     update : _update,
     paddle: paddle,
-    getScore: getScore,
-    addScore: addScore
+    getScore: function() { return score; },
+    addScore: function() {score++;}
   };
 }

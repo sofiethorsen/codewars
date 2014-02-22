@@ -126,14 +126,11 @@ module.exports = function (options) {
         var out = vector(outDeg, l);
         speedX = out.x;
         speedY = out.y;
-
         if (speedY > 0) {
           speedY = -speedY;
           speedX = -speedX;
         }
-
         latestLineHit = "bottomLeftLine";
-        console.log("collides bottomLeftLine");
       }
     }
     // Right half
@@ -149,9 +146,7 @@ module.exports = function (options) {
           speedY = -speedY;
           speedX = -speedX;
         }
-
         latestLineHit = "toprightLine";
-        console.log("collides toprightLine");
       }
       var yBot = bottomrightLine(ball_mid_x);
       if (ball_mid_y > yBot && latestLineHit !== "bottomrightLine") {
@@ -164,16 +159,9 @@ module.exports = function (options) {
           speedY = -speedY;
           speedX = -speedX;
         }
-
         latestLineHit = "bottomrightLine";
-        console.log("collides bottomrightLine");
       }
     }
-
-
-    // if (y === 0 || y === HEIGHT-constants.BALL_HEIGHT) {
-    //   speedY = -speedY;
-
 
     if (x < 0) {
       resetBall();
