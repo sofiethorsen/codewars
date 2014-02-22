@@ -45,6 +45,8 @@ function Paddle(side) {
         bottom: function() { return top + PADDLE_HEIGHT; },
         left: function() { return left; },
         right: function() { return left + PADDLE_WIDTH; },
+        width: function() { return PADDLE_WIDTH; },
+        height: function() { return PADDLE_HEIGHT; },
         collides: function(ball) {
             if (!(this.right() < ball.left() ||
                   this.left() > ball.right() ||
