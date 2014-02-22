@@ -1,0 +1,5 @@
+Introduce rectangular blocks in the middle of the game-area, to be acting the sam way blocks do in the famous breakout arcade game.
+
+1) Create a grid of blocks in the middle of the game-area. The blocks should be at least as wide as half a game-paddle and so many that it's not possible to bounce the ball to the side of them. Different colors are nice but not necessary. 
+
+2) When the ball hits a block, the block will disappear and the ball will react the same way it had if it had hit a paddle (the eight different directions again) except the speed remains the same. 
