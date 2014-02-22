@@ -137,7 +137,7 @@ body {
   top: 120px;
 }
 
-#ball {
+.ball {
   position: absolute;
   top: 225px;
   left: 475px;
