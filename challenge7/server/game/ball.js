@@ -8,13 +8,10 @@ module.exports = function (options) {
   var latestLineHit = null;
 
   function resetBall() {
-    //x = constants.WIDTH/2;
-    //y = constants.HEIGHT/2;
     x = constants.WIDTH / 2;
     y = 20;
     speedX = lib.random() * 5;
     speedY = lib.random() * 5;
-    // Speed should be at least 5
     speedX =+ lib.sign(speedX) * 5;
     speedY =+ lib.sign(speedY) * 5;
     latestHit = null;
@@ -39,13 +36,11 @@ module.exports = function (options) {
   var hitBlock = function(block) {
     var middle_ball = this.left() + this.width() / 2;
     var block_middle = block.left() + block.width() / 2;
-
     if (speedY > speedX) {
       speedY = -speedY;
     } else {
       speedX = -speedX;
     }
-
   };
 
   var _get = function() {
@@ -106,7 +101,6 @@ module.exports = function (options) {
     if (ball_mid_x < half) {
       var yTop = topLeftLine(ball_mid_x);
       if (ball_mid_y < yTop && latestLineHit !== "topLeftLine") {
-        //speedY *= -1;
         var outDeg = 2 * toRad(150) - toRad(180) - incoming;
         var out = vector(outDeg, l);
         speedX = out.x;
@@ -116,9 +110,7 @@ module.exports = function (options) {
           speedY = -speedY;
           speedX = -speedX;
         }
-
         latestLineHit = "topLeftLine";
-        console.log("collides topLeftLine");
       }
       var yBot = bottomLeftLine(ball_mid_x);
       if (ball_mid_y > yBot && latestLineHit !== "bottomLeftLine") {
