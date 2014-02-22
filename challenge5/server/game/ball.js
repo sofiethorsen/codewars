@@ -1,7 +1,7 @@
 lib = require('./lib');
 
-var HEIGHT = 500;
-var WIDTH = 700;
+var HEIGHT = 520;
+var WIDTH = 520;
 module.exports = function (options) {
   var BALL_WIDTH = 25;
   var BALL_HEIGHT = 25;
@@ -11,8 +11,8 @@ module.exports = function (options) {
   var latestHit = null;
 
   function resetBall() {
-    x = 500;
-    y = 100 + Math.random() * 300;
+    x = WIDTH/2;
+    y = HEIGHT/2;
     speedX = lib.random() * 5;
     speedY = lib.random() * 5;
     // Speed should be at least 5
