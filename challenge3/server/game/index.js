@@ -13,9 +13,60 @@ var HEIGHT = 500;
 var paddle_left = Paddle("left");
 var paddle_right = Paddle("right");
 
-
-
 function Player(options) {
+  var paddle = options.paddle;
+  var socket = options.socket;
+  var _direction = "none";
+
+  socket.on('paddleMove', function (data) {
+    _direction = data.direction;
+  });
+
+  _update = function(time) {};
+
+  return {
+    direction : _direction
+    update : _update;
+  }
+}
+
+function Bot(options) {
+  var paddle = options.paddle;
+  var ball = options.ball;
+  var latest_move_at = lib.unixTime();
+  var max_move = HEIGHT/10;
+  var _direction = "none";
+  
+  _update = function(time) {
+    if (lib.unixTime() - latest_move_at < 333) {
+        return; //yield
+    }
+    
+    var paddle = player.paddle;
+
+    var paddle_mid = paddle.top() + paddle.height()/2;
+    var ball_mid = ball.top() + ball.height()/2;
+    var move = ball_mid-paddle_mid; // + ball.ySpeed() * (60 / 3);
+
+    move = Math.min(Math.max(move, -max_move), max_move);
+
+    if (move < 0) {
+      _direction = "up";
+    }
+    else if (move > 0) {
+      _direction = "down";
+    }
+    else {
+      direction = "none";
+    }
+
+    latest_move_at = unixTime();
+  }
+
+  return {
+    direction : _direction
+    update : _update;
+  }
 
 }
 
@@ -73,9 +124,6 @@ exports.setPlayer = function(socket) {
 
 
   // data.id, data.direction
-  socket.on('paddleChange', function (data) {
-    console.log(data);
-  });
 
 };
 

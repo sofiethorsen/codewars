@@ -9,3 +9,7 @@ exports.random = function() {
 exports.limit = function(current, min, max) {
   return Math.max(Math.min(current, max), min);
 };
+
+exports.unixTime = function() {
+    return Math.round(new Date().getTime());
+};
