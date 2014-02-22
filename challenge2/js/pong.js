@@ -3,16 +3,18 @@ unixTime = function() {
 };
 
 Bot = function (options) {
-    var paddle = options.paddle;
+    //var paddle = options.paddle;
     var ball = options.ball;
     var max_move = 50;
     var latest_move_at = unixTime();
 
 
-    _move = function() {
+    _move = function(player) {
         if (unixTime() - latest_move_at < 333) {
             return; //yield
         }
+
+        var paddle = player.paddle;
 
         var paddle_mid = paddle.node.position().top + paddle.node.height()/2;
         var ball_mid = ball.node.position().top + ball.node.height()/2;
@@ -26,10 +28,12 @@ Bot = function (options) {
         latest_move_at = unixTime();
     };
 
-
+    return {
+        move: _move
+    }
 }
 
-Player = function(options) {
+Player = function(options, update_func) {
     var NAME = options.name;
     var KEY_UP = options.keyUp;
     var KEY_DOWN = options.keyDown;
@@ -86,6 +90,9 @@ Player = function(options) {
         name: NAME,
         score: _score,
         updateScore: _updateScore,
+        update: function(time) {
+            update_func(this, time);
+        },
         paddle: options.paddle,
     };
 };
@@ -133,9 +140,6 @@ $(document).ready(function() {
     paddle_left = Paddle($("#left"));
     paddle_right = Paddle($("#right"));
 
-    player1 = Player({name: 'Player 1', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}); // a - up, z - down
-    player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}); // up/down arrows
-
     var ball = Ball($("#ball"), function (side) {
         if(side == 'left') {
             player2.updateScore();
@@ -144,12 +148,19 @@ $(document).ready(function() {
         };
     });
 
-    bot = Bot({paddle : paddle_right, ball : ball});
+    bot = Bot({ball : ball});
+
+    player1 = Player({name: 'Player 1', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}, updatePlayer); // a - up, z - down
+    //player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}, updatePlayer); // up/down arrows
+    player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}, bot.move); // up/down arrows
+
 
     window.requestAnimationFrame(function loop(time) {
         if(!haveWinner()) {
-            updatePlayer(player1);
-            updatePlayer(player2);
+            //updatePlayer(player1);
+            //updatePlayer(player2);
+            player1.update(time);
+            player2.update(time);
             ball.update();
 
             ball.collied(paddle_left, "left");

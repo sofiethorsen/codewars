@@ -1,4 +1,4 @@
-Player = function(options) {
+Player = function(options, update_func) {
     var NAME = options.name;
     var KEY_UP = options.keyUp;
     var KEY_DOWN = options.keyDown;
@@ -55,6 +55,9 @@ Player = function(options) {
         name: NAME,
         score: _score,
         updateScore: _updateScore,
+        update: function(time) {
+            update_func(this, time);
+        },
         paddle: options.paddle,
     };
 };

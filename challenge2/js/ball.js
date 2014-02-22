@@ -92,6 +92,7 @@ function Ball(node, paddleHitCallback) {
 
   return {
     update : update,
-    collied : collied
+    collied : collied,
+    node: node
   };
 };
