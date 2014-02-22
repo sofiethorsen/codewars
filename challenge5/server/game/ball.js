@@ -5,6 +5,7 @@ module.exports = function (options) {
   var callback = options.callback;
   var speedX, speedY, x, y;
   var latestHit = null;
+  var latestLineHit = null;
 
   function resetBall() {
     x = constants.WIDTH/2;
@@ -15,6 +16,7 @@ module.exports = function (options) {
     speedX =+ lib.sign(speedX) * 5;
     speedY =+ lib.sign(speedY) * 5;
     latestHit = null;
+    latestLineHit = null;
 
   };
   resetBall();
@@ -68,26 +70,30 @@ module.exports = function (options) {
     // Left half
     if (ball_mid_x < half) {
       var yTop = topLeftLine(ball_mid_x);
-      if (ball_mid_y < yTop) {
+      if (ball_mid_y < yTop && latestLineHit !== "topLeftLine") {
         speedY *= -1;
+        latestLineHit = "topLeftLine";
         console.log("collides topLeftLine");
       }
       var yBot = bottomLeftLine(ball_mid_x);
-      if (ball_mid_y > yBot) {
+      if (ball_mid_y > yBot && latestLineHit !== "bottomLeftLine") {
         speedY *= -1;
+        latestLineHit = "bottomLeftLine";
         console.log("collides bottomLeftLine");
       }
     }
     // Right half
     else {
       var yTop = toprightLine(ball_mid_x);
-      if (ball_mid_y < yTop) {
+      if (ball_mid_y < yTop && latestLineHit !== "toprightLine") {
         speedY *= -1;
+        latestLineHit = "toprightLine";
         console.log("collides toprightLine");
       }
       var yBot = bottomrightLine(ball_mid_x);
-      if (ball_mid_y > yBot) {
+      if (ball_mid_y > yBot && latestLineHit !== "bottomrightLine") {
         speedY *= -1;
+        latestLineHit = "bottomrightLine";
         console.log("collides bottomrightLine");
       }
     }
