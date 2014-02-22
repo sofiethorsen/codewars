@@ -6,15 +6,25 @@ body {
 }
 
 #frame {
-  width: 1000px;
-  height: 500px;
-  top: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: 0;
-  border-top: 5px solid white;
-  border-bottom: 5px solid white;
-  position: relative;
+    margin: 250px auto;
+    width: 520px;
+    height: 250px;
+    background: #6C6;
+    position: relative;
+}
+#frame:before, #frame:after {
+    content:"";
+    border-left: 260px solid transparent;
+    border-right: 260px solid transparent;
+    position: absolute;
+}
+#frame:before {
+    top: -150px;
+    border-bottom: 150px solid #6C6;
+}
+#frame:after {
+    bottom: -150px;
+    border-top: 150px solid #6C6;
 }
 
 #message {
@@ -36,7 +46,7 @@ body {
 
 #menu {
   text-align: center;
-  padding-top: 200px;
+  padding-top: 80px;
   color: white;
 }
 
