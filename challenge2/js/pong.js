@@ -18,9 +18,9 @@ Bot = function (options) {
 
         var paddle_mid = paddle.node.position().top + paddle.node.height()/2;
         var ball_mid = ball.node.position().top + ball.node.height()/2;
-        var move = paddle_mid-ball_mid;
-
-        move = Math.max(Math.min(move, -max_move), max_move);
+        var move = ball_mid-paddle_mid;
+        console.log(paddle_mid, ball_mid);
+        move = Math.min(Math.max(move, -max_move), max_move);
 
         paddle.move(move);
 
