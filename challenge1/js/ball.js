@@ -1,9 +1,7 @@
 function Ball(node, paddleHitCallback) {
 
-
-  var speed = 10;
-  var speedX = 13;
-  var speedY = 37;
+  var speedX = 7;
+  var speedY = 7;
   var o = node.position();
   var x = o.left;
   var y = o.top;
