@@ -32,9 +32,10 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on("newGameMode", function (mode) {
-    if (mode === "singelplayer") {
+    console.log("MODE", mode)
+    if (mode === "singleplayer") {
       console.log("NEW GAME")
-      game = new Game({mode : "singelplayer" }); 
+      game = new Game({mode : "singleplayer" }); 
     }
 
     if (mode === "multiplayer") {
