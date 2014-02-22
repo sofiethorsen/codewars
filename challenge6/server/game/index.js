@@ -102,7 +102,7 @@ module.exports = function(options) {
   // Main loop.
   function start() {
     console.log("start")
-    blocks.add( new Block({top : 100, left : 200}));
+    blocks.add( new Block({top : 150, left : 250}));
     game_loop = setInterval(function() {
       if (player_left === null) return;
       updateGame();
