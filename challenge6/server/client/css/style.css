@@ -95,6 +95,7 @@ body {
   height: 100px;
   width: 500px;
   position: absolute;;
+  z-index: 5;
 }
 
 .hide {

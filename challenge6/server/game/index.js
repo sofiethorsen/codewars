@@ -105,7 +105,7 @@ module.exports = function(options) {
     console.log("start")
     //blocks.push( new Block({top : 150, left : 250}));
     for (var i = 0; i < 5; i++) {
-      blocks.push(Block({top : 150 + (constants.BLOCK_HEIGHT + 10) * i, left : 250}));
+      blocks.push(Block({top : 150 + (constants.BLOCK_HEIGHT + 10) * i, left : 260 - constants.BLOCK_WIDTH / 2}));
     }
     game_loop = setInterval(function() {
       if (player_left === null) return;
