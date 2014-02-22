@@ -86,12 +86,10 @@ function haveWinner() {
     var message = $('#message');
 
     if(player1.score() == winScore) {
-        console.log('player1 wins');
         message.removeClass('hide');
         message.html(player1.name.toUpperCase() + ' WINS!');
         return true;
     } else if(player2.score() == winScore) {
-        console.log('player2 wins');
         message.removeClass('hide');
         message.html(player2.name.toUpperCase() + ' WINS!');
         return true;
