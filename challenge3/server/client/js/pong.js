@@ -60,7 +60,14 @@ var Paddle = function(node) {
 };
 
 function refresh(player, data) {
-    player.paddle.move(data.top);
+    var ball = data.ball;
+    var left = data.paddle_left;
+    var right = data.paddle_right;
+
+    console.log(ball);
+    $("#ball").css({top: ball.y, left: ball.x});
+    $("#left").css({top: left.y, left: right.x});
+    $("#right").css({top: right.y, left: left.x});
 };
 
 $(document).ready(function() {
