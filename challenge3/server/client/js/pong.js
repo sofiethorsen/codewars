@@ -28,23 +28,8 @@ Player = function(options) {
         });
     };
 
-    _score = function() {
-        return score;
-    };
-
-    _updateScore = function() {
-        score += 1;
-        scoreBoard.html(score);
-        return score;
-    };
-
     init();
 
-    return {
-        name: NAME,
-        score: _score,
-        updateScore: _updateScore,
-    };
 };
 
 var Paddle = function(node) {
@@ -62,11 +47,15 @@ function refresh(data) {
     var ball = data.ball;
     var left = data.paddle_left;
     var right = data.paddle_right;
+    var leftScore = data.score_left;
+    var rightScore = data.score_right;
 
     console.log(left);
     $("#ball").css({top: ball.y, left: ball.x});
-    $("#left").css({top: left.y, left: left.x});
-    $("#right").css({top: right.y, left: right.x});
+    $("#left").css({top: left.y, left: right.x});
+    $("#right").css({top: right.y, left: left.x});
+    $('.left-scoreboard').html(leftScore);
+    $('.right-scoreboard').html(rightScore);
 };
 
 $(document).ready(function() {
@@ -75,7 +64,7 @@ $(document).ready(function() {
         refresh(data);
     });
 
-    player = Player({name: 'Player1', keyUp: 38, keyDown: 40, scoreBoard: $('.player1'), socket: socket});
+    Player({name: 'Player1', keyUp: 38, keyDown: 40, socket: socket});
 });
 
 
