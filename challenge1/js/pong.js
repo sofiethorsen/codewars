@@ -48,6 +48,12 @@ Paddle = function(node) {
 
 $(document).ready(function() {
     var left = Paddle($("#left"));
+    var ball = Ball($("#ball"));
+
+    setInterval(function () {
+        ball.update();
+    }, 100);
+    
     left.move(2000);
 });
 
