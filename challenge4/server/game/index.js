@@ -11,6 +11,8 @@ module.exports = function(options) {
 
   var player_left = null;
   var player_right = null;
+  var game_loop = null;
+
   var ball = Ball({
     callback: function(direction) {
       if (direction === "right") {
@@ -68,7 +70,7 @@ module.exports = function(options) {
   // Main loop.
   function start() {
     console.log("start")
-    setInterval(function() {
+    game_loop = setInterval(function() {
       if (player_left === null) return;
       updateGame();
     }, 50);
@@ -101,9 +103,15 @@ module.exports = function(options) {
 
   };
 
-  return {
-    addPlayer : addPlayer
+  var _stop = function () {
+    console.log("stopping game");
+    clearInterval(game_loop);
   }
+
+  return {
+    addPlayer : addPlayer,
+    stop : _stop
+  };
 
 
 };

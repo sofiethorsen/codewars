@@ -25,6 +25,10 @@ var waiting_game = null;
 io.sockets.on('connection', function (socket) {
   var game;
 
+  socket.on("disconnect", function() {
+    game.stop();
+  });
+
   socket.on("newGameMode", function (mode) {
     if (mode === "singelplayer") {
       console.log("NEW GAME")
