@@ -6,5 +6,5 @@ module.exports = {
   GAME_AREA_TOP: 150,
   GAME_AREA_BOTTOM: 400,
   BLOCK_WIDTH: 10,
-  BLOCK_HEIGHT: 25
+  BLOCK_HEIGHT: 60
 }
