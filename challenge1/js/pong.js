@@ -121,8 +121,8 @@ $(document).ready(function() {
             updatePlayer(player2);
             ball.update();
 
-            ball.collied(paddle_left);
-            ball.collied(paddle_right);
+            ball.collied(paddle_left, "left");
+            ball.collied(paddle_right, "right");
         };
 
         window.requestAnimationFrame(loop);

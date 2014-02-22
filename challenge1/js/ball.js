@@ -17,6 +17,8 @@ function Ball(node, paddleHitCallback) {
   var x = node.position().left;
   var y = 100 + Math.random() * 300;
 
+  var lastHIt = null;
+
   node.position().top = y;
 
   var resetPosition = function() {
@@ -27,6 +29,8 @@ function Ball(node, paddleHitCallback) {
     // Speed should be at least 5
     speedX =+ sign(speedX) * 5;
     speedY =+ sign(speedY) * 5;
+
+    lastHIt = null;
   };
 
   var hitPaddle = function(direction) {
@@ -40,9 +44,14 @@ function Ball(node, paddleHitCallback) {
     return Math.max(Math.min(current, max), min);
   };
 
-  var collied = function(paddle) {
+  var collied = function(paddle, type) {
+    if (type === lastHIt) {
+      return;
+    }
+
     var o = node.overlaps(paddle.node);
     if (o.targets.length > 0) {
+      lastHIt = type;
 
       var middle_ball = node.position().top + node.height() / 2;
       var top_paddle = paddle.node.position().top - node.height() / 2;
