@@ -87,9 +87,13 @@ $(document).ready(function() {
     player2 = Player({name: 'gustaf', keyUp: 65, keyDown: 90, paddle: paddle_right, scoreBoard: $('.player2')}); // a - up, z - down
 
     var ball = Ball($("#ball"), function (side) {
-        console.log("hit " + side);
+        if(side == 'left') {
+            player2.updateScore();
+        } else if(side == 'right') {
+            player1.updateScore();
+        };
     });
-   
+
     window.requestAnimationFrame(function loop(time) {
         updatePlayer(player1);
         updatePlayer(player2);
