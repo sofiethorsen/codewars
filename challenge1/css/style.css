@@ -17,6 +17,14 @@ body {
   position: relative;
 }
 
+#divider {
+  position: absolute;
+  top: 0;
+  left: 500px;
+  width: 1px;
+  height: 500px;
+  border-left: 3px dashed white;
+}
 
 .paddle {
   width: 20px;
