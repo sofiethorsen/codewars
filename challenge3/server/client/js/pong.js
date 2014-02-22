@@ -14,9 +14,9 @@ Player = function(options) {
     controls = function(socket) {
         document.addEventListener('keyup', function(event) {
             if(event.keyCode == KEY_UP) {
-                up = false;
+                socket.emit('paddleMove', {player: NAME, direction: 'none'});
             } else if(event.keyCode == KEY_DOWN) {
-                down = false;
+                socket.emit('paddleMove', {player: NAME, direction: 'none'});
             }
         });
         document.addEventListener('keydown', function(event) {
@@ -44,7 +44,6 @@ Player = function(options) {
         name: NAME,
         score: _score,
         updateScore: _updateScore,
-        paddle: options.paddle,
     };
 };
 
@@ -59,7 +58,7 @@ var Paddle = function(node) {
     };
 };
 
-function refresh(player, data) {
+function refresh(data) {
     var ball = data.ball;
     var left = data.paddle_left;
     var right = data.paddle_right;
@@ -73,13 +72,10 @@ function refresh(player, data) {
 $(document).ready(function() {
     var socket = io.connect('http://localhost');
     socket.on('update', function(data) {
-        refresh(player, data);
+        refresh(data);
     });
 
-    paddle_left = Paddle($("#left"));
-    player = Player({name: 'Player1', keyUp: 38, keyDown: 40, paddle: paddle_left, scoreBoard: $('.player1'), socket: socket});
-
-
+    player = Player({name: 'Player1', keyUp: 38, keyDown: 40, scoreBoard: $('.player1'), socket: socket});
 });
 
 
