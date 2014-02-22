@@ -83,8 +83,8 @@ $(document).ready(function() {
     paddle_left = Paddle($("#left"));
     paddle_right = Paddle($("#right"));
 
-    player1 = Player({name: 'klas', keyUp: 38, keyDown: 40, paddle: paddle_left, scoreBoard: $('.player1')}); // up/down arrows
-    player2 = Player({name: 'gustaf', keyUp: 65, keyDown: 90, paddle: paddle_right, scoreBoard: $('.player2')}); // a - up, z - down
+    player2 = Player({name: 'klas', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player1')}); // up/down arrows
+    player1 = Player({name: 'gustaf', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player2')}); // a - up, z - down
 
     var ball = Ball($("#ball"), function (side) {
         if(side == 'left') {
