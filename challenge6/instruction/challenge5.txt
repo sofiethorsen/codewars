@@ -1,7 +1,0 @@
-Change the shape of the game-area from square to hexagonal
-
-1) Keep the right and left openings which are protected by the player's paddles.
-
-2) Exchange the straight horizontal upper wall with two walls at 30 degree angles to the player sides. Do the dame with the lower wall, forming a proper hexagon of the game-area with two open sides across each other. 
-
-3) Make sure the overall gameplay works on the new game-area. The ball should bounce according to the same rules as before.
