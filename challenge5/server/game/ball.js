@@ -62,14 +62,13 @@ module.exports = function (options) {
   };
 
   var degree = function(x, y) {
-    return Math.atan(y, x);
+    return Math.atan(y / x);
   };
 
   var vector = function (degree, length) {
-    console.log(Math.asin(degree), length);
     return {
-      x : Math.acos(degree)*length,
-      y : Math.asin(degree)*length
+      x : Math.cos(degree)*length,
+      y : Math.sin(degree)*length
     }
   }
 
@@ -79,13 +78,11 @@ module.exports = function (options) {
 
 
     d = degree(x, y);
-    l = degree(x, y);
+    l = length(x, y);
 
     v = vector(d, l);
 
     console.log(x, y, v);
-
-
 
     var ball_mid_x = x + this.width()/2;
     var ball_mid_y = y + this.height()/2;
