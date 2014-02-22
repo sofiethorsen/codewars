@@ -50,6 +50,10 @@ body {
   margin-right: auto;
 }
 
+#waiting {
+  color: white;
+}
+
 .hide {
   display: none;
 }
