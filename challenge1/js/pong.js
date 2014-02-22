@@ -88,9 +88,9 @@ $(document).ready(function() {
 
     var ball = Ball($("#ball"), function (side) {
         if(side == 'left') {
-            player2.updateScore();
-        } else if(side == 'right') {
             player1.updateScore();
+        } else if(side == 'right') {
+            player2.updateScore();
         };
     });
 
