@@ -16,8 +16,16 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/client/index.html');
 });
 
-io.sockets.on('connection', function (socket) {
-  g = game("singleplayer");
 
+
+
+var g = null;
+io.sockets.on('connection', function (socket) {
+  if (g == null) {
+    console.log("NEW GAME")
+    g = game({mode : "multiplayer" });  
+  } else {
+    console.log("GAME exists");
+  }
   g.addPlayer(socket);
 });
