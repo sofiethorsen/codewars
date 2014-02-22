@@ -6,7 +6,8 @@ Paddle = require('./paddle');
 
 
 
-module.exports = function(type) {
+module.exports = function(options) {
+  var mode = options.mode;
 
   var player_left = null;
   var player_right = null;
@@ -20,20 +21,6 @@ module.exports = function(type) {
       }
     }
   });
-
-
-
-
-  function resetGame (socket) {
-    var paddle_left = Paddle("left");
-    var paddle_right = Paddle("right");
-
-    player_left = Player({socket : socket, paddle: paddle_left});
-    player_right = Bot({paddle: paddle_right, ball: ball});
-  }
-
-
-
 
   function sendState() {
     data = {
@@ -51,12 +38,12 @@ module.exports = function(type) {
       },
       score_left : player_left.getScore(),
       score_right : player_right.getScore()
-    }
+    };
     if (player_left.socket !== null && player_left.socket !== undefined) {
-      player_left.socket.emit('update', data);  
+      player_left.socket.emit('update', data);
     }
     if (player_right.socket !== null && player_right.socket !== undefined) {
-      player_right.socket.emit('update', data);  
+      player_right.socket.emit('update', data);
     }
   }
 
@@ -79,14 +66,34 @@ module.exports = function(type) {
   }
 
   // Main loop.
-  setInterval(function() {
-    if (player_left === null) return;
-    updateGame();
-  }, 50);
-
+  function start() {
+    setInterval(function() {
+      if (player_left === null) return;
+      updateGame();
+    }, 50);
+  }
 
   var addPlayer = function(socket) {
-    resetGame(socket);
+    if (mode === "singleplayer") {
+      var paddle_left = Paddle("left");
+      var paddle_right = Paddle("right");
+
+      player_left = Player({socket : socket, paddle: paddle_left});
+      player_right = Bot({paddle: paddle_right, ball: ball});
+      start();
+    }
+    else if (mode === "multiplayer") {
+      if (player_left !== null && player_left !== undefined) {
+        var paddle_left = Paddle("left");
+        player_left = Player({socket : socket, paddle: paddle_left});
+      }
+      else {
+        var paddle_right = Paddle("right");
+        player_right = Player({socket : socket, paddle: paddle_right});
+        start();
+      }
+    }
+
   };
 
   return {

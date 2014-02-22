@@ -16,8 +16,12 @@ app.get('/', function (req, res) {
   res.sendfile(__dirname + '/client/index.html');
 });
 
+
+
+
+
 io.sockets.on('connection', function (socket) {
-  g = game("singleplayer");
+  g = game({mode : "singleplayer" });
 
   g.addPlayer(socket);
 });
