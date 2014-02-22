@@ -45,6 +45,8 @@ body {
 
 .scores {
   color: white;
+  padding: 30px;
+  padding-top: 0;
   font-size: 40px;
 }
 
