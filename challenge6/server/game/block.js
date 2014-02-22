@@ -4,6 +4,7 @@ module.exports = function (option) {
     var top = option.top;
     var left = option.left;
     var visible = true;
+    var special = Math.random() <= 0.2;
 
     return {
         height: function() { return constants.BLOCK_HEIGHT;},
@@ -15,6 +16,7 @@ module.exports = function (option) {
         right: function() { return left + constants.BLOCK_WIDTH; },
         width: function() { return constants.BLOCK_WIDTH; },
         height: function() { return constants.BLOCK_HEIGHT; },
+        special: function() { return special; },
         collides: function(object) {
             if (visible == false) {
                 return false;
