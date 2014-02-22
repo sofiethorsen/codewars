@@ -2,6 +2,7 @@ Player = function(options) {
     var NAME = options.name;
     var KEY_UP = options.keyUp;
     var KEY_DOWN = options.keyDown;
+    var scoreBoard = options.scoreBoard;
     var score = 0;
     var up = false;
     var down = false;
@@ -32,7 +33,9 @@ Player = function(options) {
     };
 
     _updateScore = function() {
-        return score += 1;
+        score += 1;
+        scoreBoard.html(score);
+        return score;
     };
 
     _direction = function() {
@@ -79,8 +82,8 @@ $(document).ready(function() {
     paddle_left = Paddle($("#left"));
     paddle_right = Paddle($("#right"));
 
-    player1 = Player({name: 'klas', keyUp: 38, keyDown: 40, paddle: paddle_left}); // up/down arrows
-    player2 = Player({name: 'gustaf', keyUp: 65, keyDown: 90, paddle: paddle_right}); // a - up, z - down
+    player1 = Player({name: 'klas', keyUp: 38, keyDown: 40, paddle: paddle_left, scoreBoard: $('.player1')}); // up/down arrows
+    player2 = Player({name: 'gustaf', keyUp: 65, keyDown: 90, paddle: paddle_right, scoreBoard: $('.player2')}); // a - up, z - down
 
     var ball = Ball($("#ball"), function (side) {
         console.log("hit " + side);
