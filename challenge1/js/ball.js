@@ -2,17 +2,12 @@ function Ball(node, paddleHitCallback) {
 
   var speedX = 7;
   var speedY = 7;
-  var o = node.position();
-  var x = o.left;
-  var y = o.top;
+  var x = node.position().left;
+  var y = node.position().top;
 
   var resetPosition = function() {
     x = 500;
     y = 250;
-  };
-
-  var get = function () {
-    return node.position();
   };
 
   var hitPaddle = function(direction) {
@@ -26,20 +21,19 @@ function Ball(node, paddleHitCallback) {
 
   var collied = function(paddle) {
     var o = node.overlaps(paddle.node);
-    if (o.targets.length > 0)
+    if (o.targets.length > 0) {
       hitPaddle();
+    }
   }; 
 
   var update = function () {
     x = limit(x + speedX, 0, 1000-node.width());
     y = limit(y + speedY, 0, 500-node.height());
 
-    if (y === 0) {
+    if (y === 0 || y === 500-node.height()) {
       speedY = -speedY;
     }
-    if (y === 500-node.height()) {
-      speedY = -speedY;
-    }
+
     if (x === 0) {
       paddleHitCallback("left");
       resetPosition();
@@ -48,12 +42,11 @@ function Ball(node, paddleHitCallback) {
       paddleHitCallback("right");
       resetPosition();
     }
+
     node.css({top: y, left: x}); //Update the nodes position
   };
 
   return {
-    get : get,
-    hitPaddle : hitPaddle,
     update : update,
     collied : collied
   };
