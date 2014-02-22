@@ -1,7 +1,0 @@
-Make it possible for two simultaneous human players on the server.
-
-1) Make it possible for the server to be stopped, and to be started in single-player (with bot) or two-player mode.
-
-2) Make the server reply to premature polls that not all players are present, if less than two players have asked to start a two-player game. 
-
-3) Make sure that two players can start a two-player game asynchronously and that a server-side two-player game is started when both players have done so and begin polling. 
