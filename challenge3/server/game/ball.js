@@ -7,7 +7,7 @@ module.exports = function (argument) {
   var speedX, speedY, x, y;
 
   function resetBall() {
-    x = node.position().left;
+    x = 500;
     y = 100 + Math.random() * 300;
     speedX = lib.random() * 5;
     speedY = lib.random() * 5;
@@ -32,7 +32,7 @@ module.exports = function (argument) {
 
   var _get = function() {
     return { x: x, y: y };
-  }; 
+  };
 
   var _update = function () {
     x = lib.limit(x + speedX, 0, WIDTH-BALL_WITH);
