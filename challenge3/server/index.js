@@ -7,8 +7,6 @@ var app = express()
 
 server.listen(8080);
 
-
-
 app.use("/js", express.static(__dirname + '/client/js'));
 app.use("/css", express.static(__dirname + '/client/css'));
 
