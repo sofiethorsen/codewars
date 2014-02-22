@@ -61,7 +61,8 @@ module.exports = function(options) {
         y : blocks[i].top(),
         width : blocks[i].width(),
         height : blocks[i].height(),
-        visible : blocks[i].visible()
+        visible : blocks[i].visible(),
+        special: blocks[i].special(),
       })
     };
 

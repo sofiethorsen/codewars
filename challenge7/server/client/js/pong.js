@@ -51,7 +51,7 @@ function refresh(data) {
                 var elem = $('<div class="block"/>');
                 elem.css({top: block.y, left: block.x, width: block.width, height: block.height});
                 if(block.special) {
-                    elem.css({color: orange})
+                    elem.css({backgroundColor: "orange"})
                 }
                 $("#game").append(elem);
             }
