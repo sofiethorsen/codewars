@@ -37,7 +37,7 @@ module.exports = function (options) {
   var _get = function() {
     return { x: x, y: y };
   };
-  
+
   var collide = function(paddle) {
     if (latestHit === paddle) {
       return;
@@ -51,12 +51,12 @@ module.exports = function (options) {
 
   var GAME_AREA_TOP = 150;
   var GAME_AREA_BOTTOM = 400;
-  
-  var topLeftLine     = function(x) { return GAME_AREA_TOP    + -3*x; };
-  var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + 3*x; };
-  var toprightLine    = function(x) { return GAME_AREA_TOP    + -3*(constants.WIDTH-x); };
-  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + 3*(constants.WIDTH-x); };
-  
+
+  var topLeftLine     = function(x) { return GAME_AREA_TOP    + -(1/3)*x; };
+  var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + (1/3)*x; };
+  var toprightLine    = function(x) { return GAME_AREA_TOP    + -(1/3)*(constants.WIDTH-x); };
+  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + (1/3)*(constants.WIDTH-x); };
+
 
   var _update = function () {
     x += speedX;
