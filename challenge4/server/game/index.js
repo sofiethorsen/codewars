@@ -10,24 +10,24 @@ module.exports = function(type) {
   var ball = Ball({
     callback: function(direction) {
       if (direction === "right") {
-        player.addScore();
+        player_left.addScore();
       }
       if (direction === "left") {
-        bot.addScore();
+        player_right.addScore();
       }
     }
   });
 
 
-  var player = null;
-  var bot = null;
+  var player_left = null;
+  var player_right = null;
 
   function resetGame (socket) {
     var paddle_left = Paddle("left");
     var paddle_right = Paddle("right");
 
-    player = Player({socket : socket, paddle: paddle_left});
-    bot = Bot({paddle: paddle_right, ball: ball});
+    player_left = Player({socket : socket, paddle: paddle_left});
+    player_right = Bot({paddle: paddle_right, ball: ball});
   }
 
   addPlayer = function(socket) {
@@ -36,48 +36,47 @@ module.exports = function(type) {
 
 
   function sendState() {
-
     data = {
       ball : {
         x: ball.left(),
         y: ball.top()
       },
       paddle_left : {
-        x: player.paddle.left(),
-        y: player.paddle.top()
+        x: player_left.paddle.left(),
+        y: player_left.paddle.top()
       },
       paddle_right : {
-        x: bot.paddle.left(),
-        y: bot.paddle.top()
+        x: player_right.paddle.left(),
+        y: player_right.paddle.top()
       },
-      score_left : player.getScore(),
-      score_right : bot.getScore()
+      score_left : player_left.getScore(),
+      score_right : player_right.getScore()
     }
 
-    player.socket.emit('update', data);
+    player_left.socket.emit('update', data);
   }
 
   function updateGame() {
-    player.update();
-    bot.update();
+    player_left.update();
+    player_right.update();
 
     ball.update();
 
-    player.paddle.setDirection(player.direction());
-    bot.paddle.setDirection(bot.direction());
+    player_left.paddle.setDirection(player_left.direction());
+    player_right.paddle.setDirection(player_right.direction());
 
-    ball.collide(player.paddle);
-    ball.collide(bot.paddle);
+    ball.collide(player_left.paddle);
+    ball.collide(player_right.paddle);
 
-    player.paddle.update();
-    bot.paddle.update();
+    player_left.paddle.update();
+    player_right.paddle.update();
 
     sendState();
   }
 
   // Main loop.
   setInterval(function() {
-    if (player === null) return;
+    if (player_left === null) return;
     updateGame();
   }, 50);
 
