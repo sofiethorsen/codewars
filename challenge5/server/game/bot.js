@@ -1,12 +1,10 @@
 lib = require('./lib');
-var WIDTH = 1000;
-var HEIGHT = 500;
 
 module.exports = function (options) {
   var paddle = options.paddle;
   var ball = options.ball;
   var latest_move_at = lib.unixTime();
-  var max_move = HEIGHT/10;
+  var max_move = 50;
   var _direction = "none";
   var score = 0;
 

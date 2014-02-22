@@ -1,8 +1,9 @@
 var PADDLE_WIDTH = 20;
 var PADDLE_HEIGHT = 50;
 var PADDLE_SPEED = 10;
-var WIDTH = 1000;
+
 var HEIGHT = 500;
+
 module.exports = function (side) {
     var top = 0;
     var left = side == "left" ? 0 : WIDTH - PADDLE_WIDTH;
