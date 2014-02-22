@@ -103,8 +103,8 @@ module.exports = function(options) {
   function start() {
     console.log("start")
     //blocks.push( new Block({top : 150, left : 250}));
-    for (var i = 0; i < 13; i++) {
-      blocks.push(Block({top : 50 + (constants.BLOCK_HEIGHT + 10) * i, left : 260 - constants.BLOCK_WIDTH / 2}));
+    for (var i = 0; i < 7; i++) {
+      blocks.push(Block({top : 10 + (constants.BLOCK_HEIGHT + 15) * i, left : 260 - constants.BLOCK_WIDTH / 2}));
     }
     game_loop = setInterval(function() {
       if (player_left === null) return;
