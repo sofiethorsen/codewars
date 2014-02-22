@@ -44,6 +44,22 @@ var Paddle = function(node) {
 };
 
 function refresh(data) {
+    function _redrawBlocks(blocks) {
+        gameDiv = document.getElementById('game');
+        var blockDiv = document.getElementById('blocks');
+
+        gameDiv.removeChild(blockDiv)
+        blockDiv.parentNode.removeChild(blockDiv)
+
+        var new_blocksDiv = document.createElement('div');
+        blocksDiv.id = 'blocks';
+        document.getElementsByTagName('game')[0].appendChild(blocksDiv);
+
+        blocks.forEach(function(block){
+            $(block.name).css({top: block.top, left: block.left, width: block.width, height: block.height});
+        });
+    };
+
     var ball = data.ball;
     var left = data.paddle_left;
     var right = data.paddle_right;
@@ -56,6 +72,9 @@ function refresh(data) {
     $("#right").css({top: right.y, left: right.x});
     $('.left-scoreboard').html(leftScore);
     $('.right-scoreboard').html(rightScore);
+
+    _redrawBlocks(data.blocks);
+
 };
 
 $(document).ready(function() {
