@@ -15,17 +15,29 @@ module.exports = function(options) {
   var player_right = null;
   var game_loop = null;
   var blocks = [];
+  var balls = [];
 
-  var ball = Ball({
-    callback: function(direction) {
-      if (direction === "right") {
-        player_left.addScore();
-      }
-      if (direction === "left") {
-        player_right.addScore();
-      }
-    }
-  });
+  function createBall (argument) {
+    return  Ball({
+        callback: function(ball, direction) {
+          if (direction === "right") {
+            player_left.addScore();
+          }
+          if (direction === "left") {
+            player_right.addScore();
+          }
+
+          balls.splice(balls.indexOf(ball), 1);
+
+          if (balls.length == 0) {
+            balls.push(createBall());
+          }
+
+        }
+    });
+  }
+
+  balls.push(createBall());
 
   function sendToPlayers (evt, data) {
 
@@ -53,11 +65,16 @@ module.exports = function(options) {
       })
     };
 
+    balls_data = [];
+    for (var i = balls.length - 1; i >= 0; i--) {
+      balls_data.push({
+        x : balls[i].left(),
+        y : balls[i].top(),
+      });
+    };    
+
     data = {
-      ball : {
-        x: ball.left(),
-        y: ball.top()
-      },
+      balls: balls_data,
       paddle_left : {
         x: player_left.paddle.left(),
         y: player_left.paddle.top()
@@ -77,20 +94,24 @@ module.exports = function(options) {
   function updateGame() {
     player_left.update();
     player_right.update();
-
-    ball.update();
-
     player_left.paddle.setDirection(player_left.direction());
     player_right.paddle.setDirection(player_right.direction());
 
-    ball.collide(player_left.paddle);
-    ball.collide(player_right.paddle);
 
-    for (var i = blocks.length - 1; i >= 0; i--) {
-      if (blocks[i].collides(ball)) {
-        blocks[i].hide();
-        ball.hitBlock(blocks[i]);
-      }
+    for (var i = balls.length - 1; i >= 0; i--) {
+      balls[i].update();
+      balls[i].collide(player_left.paddle);
+      balls[i].collide(player_right.paddle);
+
+      for (var i = blocks.length - 1; i >= 0; i--) {
+        if (blocks[i].collides(ball)) {
+          blocks[i].hide();
+          ball.hitBlock(blocks[i]);
+          if (blocks[i].special) {
+            balls.push(createBall());
+          }
+        }
+      };
     };
 
     player_left.paddle.update();
