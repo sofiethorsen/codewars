@@ -9,9 +9,10 @@ var PADDLE_SPEED = 10;
 var WIDTH = 1000;
 var HEIGHT = 500;
 
-
 var paddle_left = Paddle("left");
 var paddle_right = Paddle("right");
+
+var ball = Ball();
 
 function Player(options) {
   var paddle = options.paddle;
@@ -26,7 +27,8 @@ function Player(options) {
 
   return {
     direction : _direction,
-    update : _update
+    update : _update,
+    paddle: paddle
   }
 }
 
@@ -36,7 +38,7 @@ function Bot(options) {
   var latest_move_at = lib.unixTime();
   var max_move = HEIGHT/10;
   var _direction = "none";
-  
+
   _update = function(time) {
     if (lib.unixTime() - latest_move_at < 333) {
         return; //yield
@@ -65,7 +67,8 @@ function Bot(options) {
 
   return {
     direction : _direction,
-    update : _update
+    update : _update,
+    paddle: paddle
   }
 
 }
@@ -114,9 +117,11 @@ function Paddle(side) {
 
 var state;
 var player = null;
+var bot = null;
 
 function resetGame (socket) {
-  player = {socket : socket };
+  player = Player({socket : socket, paddle: paddle_left});
+  bot = Bot({paddle: paddle_right, ball: ball});
 }
 
 exports.setPlayer = function(socket) {
@@ -124,11 +129,19 @@ exports.setPlayer = function(socket) {
 
 
   // data.id, data.direction
-
 };
 
 function updateGame() {
-  // body...
+  player.update();
+  bot.update();
+
+  paddle_left.setDirection(player.direction);
+  paddle_right.setDirection(bot.direction);
+
+  paddle_left.update();
+  paddle_right.update();
+
+  // sendstate
 }
 
 // Main loop.
