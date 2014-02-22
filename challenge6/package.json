@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "express": "~3.4.8",
+    "socket.io": "~0.9.16"
+  },
+  "name": "challenge3",
+  "version": "0.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

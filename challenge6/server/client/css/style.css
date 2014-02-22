@@ -1,0 +1,135 @@
+body {
+  background-color: black;
+  padding: 0;
+  margin: 0;
+  font-family: Monaco;
+}
+
+#frame {
+  width: 520px;
+  height: 550px;
+  top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: 0;
+  position: relative;
+}
+
+.hex {
+    width: 520px;
+    height: 250px;
+    background: #6C6;
+    position: relative;
+    top: 150;
+}
+.hex:before, .hex:after {
+    content:"";
+    border-left: 260px solid transparent;
+    border-right: 260px solid transparent;
+    position: absolute;
+}
+.hex:before {
+    top: -150px;
+    border-bottom: 150px solid #6C6;
+}
+.hex:after {
+    bottom: -150px;
+    border-top: 150px solid #6C6;
+}
+
+#message {
+  position: absolute;
+  font-size: 50px;
+  top: 220px;
+  left: 310px;
+  color: white;
+}
+
+#divider {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 260px;
+  width: 1px;
+  height: 550px;
+  border-left: 3px dashed white;
+}
+
+#menu {
+  z-index: 1;
+  top: -15;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+#menu * {
+  padding: 5px;
+}
+
+#menu div {
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#menu .entry:hover {
+  cursor: pointer;
+  background-color: grey;
+}
+
+#waiting {
+  position: relative;
+  z-index: 1;
+  top: -15;
+  text-align: center;
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.paddle {
+  width: 20px;
+  height: 50px;
+  background-color: white;
+  position: absolute;;
+  top: 30px;
+}
+
+.scores {
+  position: relative;
+  z-index: 1;
+  top: -240;
+  color: white;
+  padding: 30px;
+  padding-top: 0;
+  font-size: 40px;
+}
+
+.scores .left-scoreboard {
+  float: left;
+}
+
+.scores .right-scoreboard {
+  float: right;
+}
+
+#left{
+  left: 0px;
+}
+
+#right{
+  right: 0px;
+  top: 120px;
+}
+
+#ball {
+  position: absolute;
+  top: 225px;
+  left: 475px;
+  background-color: white;
+  width: 25px;
+  height: 25px;
+}

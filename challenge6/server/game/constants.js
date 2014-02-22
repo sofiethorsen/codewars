@@ -1,0 +1,8 @@
+module.exports = {
+  HEIGHT : 520,
+  WIDTH : 520,
+  BALL_WIDTH : 25,
+  BALL_HEIGHT : 25,
+  GAME_AREA_TOP: 150,
+  GAME_AREA_BOTTOM: 400
+}
