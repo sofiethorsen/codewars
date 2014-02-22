@@ -102,13 +102,26 @@ module.exports = function (options) {
         speedX = out.x;
         speedY = out.y;
 
+        if (speedY < 0) {
+          speedY = -speedY;
+          speedX = -speedX;
+        }
 
         latestLineHit = "topLeftLine";
         console.log("collides topLeftLine");
       }
       var yBot = bottomLeftLine(ball_mid_x);
       if (ball_mid_y > yBot && latestLineHit !== "bottomLeftLine") {
-        speedY *= -1;
+        var outDeg = 2 * toRad(30) - toRad(180) - incoming;
+        var out = vector(outDeg, l);
+        speedX = out.x;
+        speedY = out.y;
+
+        if (speedY > 0) {
+          speedY = -speedY;
+          speedX = -speedX;
+        }
+
         latestLineHit = "bottomLeftLine";
         console.log("collides bottomLeftLine");
       }
@@ -117,13 +130,31 @@ module.exports = function (options) {
     else {
       var yTop = toprightLine(ball_mid_x);
       if (ball_mid_y < yTop && latestLineHit !== "toprightLine") {
-        speedY *= -1;
+        var outDeg = 2 * toRad(210) - toRad(180) - incoming;
+        var out = vector(outDeg, l);
+        speedX = out.x;
+        speedY = out.y;
+
+        if (speedY < 0) {
+          speedY = -speedY;
+          speedX = -speedX;
+        }
+
         latestLineHit = "toprightLine";
         console.log("collides toprightLine");
       }
       var yBot = bottomrightLine(ball_mid_x);
       if (ball_mid_y > yBot && latestLineHit !== "bottomrightLine") {
-        speedY *= -1;
+        var outDeg = 2 * toRad(330) - toRad(180) - incoming;
+        var out = vector(outDeg, l);
+        speedX = out.x;
+        speedY = out.y;
+
+        if (speedY > 0) {
+          speedY = -speedY;
+          speedX = -speedX;
+        }
+
         latestLineHit = "bottomrightLine";
         console.log("collides bottomrightLine");
       }
