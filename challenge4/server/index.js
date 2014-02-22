@@ -19,9 +19,13 @@ app.get('/', function (req, res) {
 
 
 
-
+var g = null;
 io.sockets.on('connection', function (socket) {
-  g = game({mode : "singleplayer" });
-
+  if (g == null) {
+    console.log("NEW GAME")
+    g = game({mode : "multiplayer" });  
+  } else {
+    console.log("GAME exists");
+  }
   g.addPlayer(socket);
 });
