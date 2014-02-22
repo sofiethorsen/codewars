@@ -77,7 +77,6 @@ function Bot(options) {
     var ball_mid = ball.top() + ball.height()/2;
     var move = ball_mid - paddle_mid; // + ball.ySpeed() * (60 / 3);
 
-    console.log(ball_mid, paddle_mid);
     move = Math.min(Math.max(move, -max_move), max_move);
 
 
@@ -104,7 +103,6 @@ function Bot(options) {
     getScore: getScore,
     addScore: addScore
   };
-
 }
 
 function Paddle(side) {

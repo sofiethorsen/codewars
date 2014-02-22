@@ -45,7 +45,6 @@ module.exports = function (options) {
     }
     if (paddle.collides(this)) {
       hitPaddle();
-
       latestHit = paddle;
     }
   };
