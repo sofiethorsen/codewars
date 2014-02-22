@@ -5,7 +5,7 @@ var PADDLE_SPEED = 10;
 constants = require('./constants');
 
 module.exports = function (side) {
-    var top = 0;
+    var top = constants.GAME_AREA_TOP;
     var left = side == "left" ? 0 : constants.WIDTH - PADDLE_WIDTH;
     var direction = 0;
 
@@ -24,7 +24,7 @@ module.exports = function (side) {
         },
         update: function() {
             top += direction * PADDLE_SPEED;
-            top = Math.max(Math.min(constants.GAME_AREA_BOTTOM - this.height(), constants.GAME_AREA_TOP), 0);
+            top = Math.max(Math.min(constants.GAME_AREA_BOTTOM - this.height(), top), constants.GAME_AREA_TOP);
         },
         top: function() { return top; },
         bottom: function() { return top + PADDLE_HEIGHT; },
