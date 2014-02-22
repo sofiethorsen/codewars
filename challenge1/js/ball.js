@@ -23,6 +23,7 @@ function Ball(node, paddleHitCallback) {
     var o = node.overlaps(paddle.node);
     if (o.targets.length > 0) {
       hitPaddle();
+      update();
     }
   }; 
 
