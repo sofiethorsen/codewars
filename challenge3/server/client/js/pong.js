@@ -52,8 +52,8 @@ function refresh(data) {
 
     console.log(left);
     $("#ball").css({top: ball.y, left: ball.x});
-    $("#left").css({top: left.y, left: right.x});
-    $("#right").css({top: right.y, left: left.x});
+    $("#left").css({top: left.y, left: left.x});
+    $("#right").css({top: right.y, left: right.x});
     $('.left-scoreboard').html(leftScore);
     $('.right-scoreboard').html(rightScore);
 };
