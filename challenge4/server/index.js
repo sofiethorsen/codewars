@@ -23,10 +23,12 @@ app.get('/', function (req, res) {
 
 var waiting_game = null;
 io.sockets.on('connection', function (socket) {
-  var game;
+  var game = null;
 
   socket.on("disconnect", function() {
-    game.stop();
+    if (game ==! null) {
+      game.stop();  
+    }
   });
 
   socket.on("newGameMode", function (mode) {
