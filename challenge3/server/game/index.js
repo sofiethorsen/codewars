@@ -106,7 +106,7 @@ function Bot(options) {
     paddle: paddle,
     getScore: getScore,
     addScore: addScore
-  }
+  };
 
 }
 
@@ -196,6 +196,9 @@ function updateGame() {
 
   paddle_left.setDirection(player.direction());
   paddle_right.setDirection(bot.direction());
+
+  ball.collide(paddle_left);
+  ball.collide(paddle_right);
 
   paddle_left.update();
   paddle_right.update();

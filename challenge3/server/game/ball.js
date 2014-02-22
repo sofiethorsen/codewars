@@ -7,6 +7,7 @@ module.exports = function (options) {
 
   var callback = options.callback;
   var speedX, speedY, x, y;
+  var latestHit = null;
 
   function resetBall() {
     x = 500;
@@ -16,6 +17,8 @@ module.exports = function (options) {
     // Speed should be at least 5
     speedX =+ lib.sign(speedX) * 5;
     speedY =+ lib.sign(speedY) * 5;
+    latestHit = null;
+
   };
   resetBall();
 
@@ -34,6 +37,17 @@ module.exports = function (options) {
 
   var _get = function() {
     return { x: x, y: y };
+  };
+  
+  var collide = function(paddle) {
+    if (latestHit === paddle) {
+      return;
+    }
+    if (paddle.collides(this)) {
+      hitPaddle();
+
+      latestHit = paddle;
+    }
   };
 
   var _update = function () {
@@ -63,6 +77,7 @@ module.exports = function (options) {
     right: right,
     bottom: bottom,
     width: width,
-    height: height
+    height: height,
+    collide: collide
   };
 }
