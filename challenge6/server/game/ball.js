@@ -37,9 +37,9 @@ module.exports = function (options) {
   };
 
   var hitBlock = function(block) {
-    /*var middle_ball = this.top() + this.height() / 2;
-    var block_middle = block.top() + block.height() / 2;
-
+    var middle_ball = this.left() + this.width() / 2;
+    var block_middle = block.left() + block.width() / 2;
+/*
     var intersection = middle_ball - block_middle;
 
     var section = Math.round(intersection / (block.height() / 8));
@@ -47,7 +47,17 @@ module.exports = function (options) {
 
     speedY = move * Math.abs(speedX);*/
 
-    speedX = -speedX;
+    if (speedY > speedX) {
+      speedY = -speedY;
+    } else {
+      speedX = -speedX;
+    }
+/*
+    if (middle_ball < block_middle) {
+      x = block_middle - this.width() / 2;
+    } else {
+      x = block_middle + this.width() / 2;
+    }*/
   };
 
   var _get = function() {
