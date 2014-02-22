@@ -25,8 +25,8 @@ function Player(options) {
   _update = function(time) {};
 
   return {
-    direction : _direction
-    update : _update;
+    direction : _direction,
+    update : _update
   }
 }
 
@@ -41,7 +41,7 @@ function Bot(options) {
     if (lib.unixTime() - latest_move_at < 333) {
         return; //yield
     }
-    
+
     var paddle = player.paddle;
 
     var paddle_mid = paddle.top() + paddle.height()/2;
@@ -64,7 +64,7 @@ function Bot(options) {
   }
 
   return {
-    direction : _direction
+    direction : _direction,
     update : _update;
   }
 
