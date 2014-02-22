@@ -1,18 +1,14 @@
 lib = require('./lib');
+constants = require('./constants');
 
-var HEIGHT = 520;
-var WIDTH = 520;
 module.exports = function (options) {
-  var BALL_WIDTH = 25;
-  var BALL_HEIGHT = 25;
-
   var callback = options.callback;
   var speedX, speedY, x, y;
   var latestHit = null;
 
   function resetBall() {
-    x = WIDTH/2;
-    y = HEIGHT/2;
+    x = constants.WIDTH/2;
+    y = constants.HEIGHT/2;
     speedX = lib.random() * 5;
     speedY = lib.random() * 5;
     // Speed should be at least 5
@@ -24,11 +20,11 @@ module.exports = function (options) {
   resetBall();
 
   var top     = function()    { return y;};
-  var bottom  = function()    { return y+BALL_HEIGHT;};
+  var bottom  = function()    { return y+constants.BALL_HEIGHT;};
   var left    = function()    { return x;};
-  var right   = function()    { return x+BALL_WIDTH;};
-  var width   = function()    { return BALL_WIDTH;};
-  var height   = function()    { return BALL_HEIGHT;};
+  var right   = function()    { return x+constants.BALL_WIDTH;};
+  var width   = function()    { return constants.BALL_WIDTH;};
+  var height   = function()    { return constants.BALL_HEIGHT;};
 
   var hitPaddle = function() {
     speedX *= 1.2;
@@ -58,8 +54,8 @@ module.exports = function (options) {
   var topLeftLine     = function(x) { return GAME_AREA_TOP    + -3*x; };
   var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + 3*x; };
   
-  var toprightLine    = function(x) { return GAME_AREA_TOP    + -3*(WIDTH-x); };
-  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + 3*(WIDTH-x); };
+  var toprightLine    = function(x) { return GAME_AREA_TOP    + -3*(constants.WIDTH-x); };
+  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + 3*(constants.WIDTH-x); };
 
     
 
@@ -70,7 +66,7 @@ module.exports = function (options) {
     var ball_mid_x = x + this.width()/2;
     var ball_mid_y = y + this.height()/2;
 
-    var half = WIDTH/2;
+    var half = constants.WIDTH/2;
 
     // Left half
     if (ball_mid_x < half) {
@@ -104,7 +100,7 @@ module.exports = function (options) {
     }
 
 
-    // if (y === 0 || y === HEIGHT-BALL_HEIGHT) {
+    // if (y === 0 || y === HEIGHT-constants.BALL_HEIGHT) {
     //   speedY = -speedY;
 
 
@@ -112,7 +108,7 @@ module.exports = function (options) {
       resetBall();
       callback("left");
     }
-    if (x === (WIDTH-BALL_WIDTH)) {
+    if (x === (constants.WIDTH-constants.BALL_WIDTH)) {
       resetBall();
       callback("right");
     }
