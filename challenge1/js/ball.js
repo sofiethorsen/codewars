@@ -51,20 +51,9 @@ function Ball(node, paddleHitCallback) {
       var intersection = middle_ball - top_paddle;
 
       var section = Math.round(intersection / (paddle_height / 8));
-      var move = (section - 4) / 6;
+      var move = (section - 4) / 3;
 
-      if (move < 0) {
-        speedX += speedY * -move;
-        speedY -= speedY * -move;
-      } else if (move > 0) {
-        speedX -= speedY * move;
-        speedY += speedY * move;
-      }
-
-
-      console.log("DIFF", section);
-
-
+      speedY = move * Math.abs(speedX);
 
       hitPaddle();
       update();
