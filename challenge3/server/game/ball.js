@@ -1,0 +1,65 @@
+lib = require('./lib');
+
+module.exports = function (argument) {
+  var BALL_WIDTH = 25;
+  var BALL_HEIGHT = 25;
+
+  var speedX, speedY, x, y;
+
+  function resetBall() {
+    x = node.position().left;
+    y = 100 + Math.random() * 300;
+    speedX = lib.random() * 5;
+    speedY = lib.random() * 5;
+    // Speed should be at least 5
+    speedX =+ lib.sign(speedX) * 5;
+    speedY =+ lib.sign(speedY) * 5;
+  };
+  resetBall();
+
+  var top     = function()    { return y;};
+  var bottom  = function()    { return y+BALL_HEIGHT;};
+  var left    = function()    { return x;};
+  var right   = function()    { return x+BALL_WIDTH;};
+  var width   = function()    { return BALL_WIDTH;};
+  var height   = function()    { return BALL_HEIGHT;};
+
+  var hitPaddle = function() {
+    speedX *= 1.2;
+    speedY *= 1.2;
+    speedX = -speedX;
+  };
+
+  var _get = function() {
+    return { x: x, y: y };
+  }; 
+
+  var _update = function () {
+    x = lib.limit(x + speedX, 0, WIDTH-BALL_WITH);
+    y = lib.limit(y + speedY, 0, HEIGHT-BALL_HEIGHT);
+
+    if (y === 0 || y === HEIGHT-BALL_HEIGHT) {
+      speedY = -speedY;
+    }
+
+    if (x === 0) {
+      resetBall();
+      console.log("someone lost")
+    }
+    if (x === (WIDTH-BALL_WITH)) {
+      resetBall();
+      console.log("someone lost")
+    }
+  };
+
+  return {
+    get: _get,
+    update: _update,
+    top: top,
+    left: left,
+    right: right,
+    bottom: bottom,
+    width: width,
+    height: height
+  };
+}

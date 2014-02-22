@@ -1,64 +1,18 @@
 lib = require('./lib');
+Ball = require('./ball');
+
+console.log(Ball);
 
 var PADDLE_WIDTH = 20;
 var PADDLE_HEIGHT = 50;
 var PADDLE_SPEED = 10;
 var WIDTH = 1000;
 var HEIGHT = 500;
-var BALL_WIDTH = 25;
-var BALL_HEIGHT = 25;  
+
 
 var paddle_left = Paddle("left");
 var paddle_right = Paddle("right");
 
-function Ball (argument) {
-
-  var speedX, speedY, x, y;
-
-  function resetBall() {
-    x = node.position().left;
-    y = 100 + Math.random() * 300;
-    speedX = lib.random() * 5;
-    speedY = lib.random() * 5;
-    // Speed should be at least 5
-    speedX =+ lib.sign(speedX) * 5;
-    speedY =+ lib.sign(speedY) * 5;
-  };
-  resetBall();
-
-  var hitPaddle = function() {
-    speedX *= 1.2;
-    speedY *= 1.2;
-    speedX = -speedX;
-  };
-
-  var _get = function() {
-    return {x: x, y: y}
-  }; 
-
-  var _update = function () {
-    x = lib.limit(x + speedX, 0, WIDTH-BALL_WITH);
-    y = lib.limit(y + speedY, 0, HEIGHT-BALL_HEIGHT);
-
-    if (y === 0 || y === HEIGHT-BALL_HEIGHT) {
-      speedY = -speedY;
-    }
-
-    if (x === 0) {
-      resetBall();
-      console.log("someone lost")
-    }
-    if (x === (WIDTH-BALL_WITH)) {
-      resetBall();
-      console.log("someone lost")
-    }
-  };
-
-  return {
-    get: _get,
-    update: _update
-  };
-}
 
 
 function Player(options) {
