@@ -6,11 +6,8 @@ Paddle = require('./paddle');
 Block = require('./block');
 constants = require('./constants');
 
-
-
 module.exports = function(options) {
   var mode = options.mode;
-
   var player_left = null;
   var player_right = null;
   var game_loop = null;
@@ -20,19 +17,14 @@ module.exports = function(options) {
   function createBall (argument) {
     return  Ball({
         callback: function(ball, direction) {
-          if (direction === "right") {
-            player_left.addScore();
-          }
-          if (direction === "left") {
-            player_right.addScore();
-          }
-
+          if (direction === "right") { player_left.addScore(); }
+          if (direction === "left") { player_right.addScore(); }
+          //Remove the ball
           balls.splice(balls.indexOf(ball), 1);
-
+          // Create a new ball if the gameboard is empty
           if (balls.length == 0) {
             balls.push(createBall());
           }
-
         }
     });
   }
@@ -40,14 +32,12 @@ module.exports = function(options) {
   balls.push(createBall());
 
   function sendToPlayers (evt, data) {
-
     if (player_left.socket !== null && player_left.socket !== undefined) {
       player_left.socket.emit(evt, data);
     }
     if (player_right.socket !== null && player_right.socket !== undefined) {
       player_right.socket.emit(evt, data);
     }
-
   }
 
   function sendState() {
@@ -124,8 +114,6 @@ module.exports = function(options) {
 
   // Main loop.
   function start() {
-    console.log("start")
-    //blocks.push( new Block({top : 150, left : 250}));
     for (var i = 0; i < 7; i++) {
       blocks.push(Block({top : 10 + (constants.BLOCK_HEIGHT + 15) * i, left : 260 - constants.BLOCK_WIDTH / 2}));
     }
@@ -139,40 +127,31 @@ module.exports = function(options) {
     if (mode === "singleplayer") {
       var paddle_left = Paddle("left");
       var paddle_right = Paddle("right");
-
       player_left = Player({socket : socket, paddle: paddle_left});
       player_right = Bot({paddle: paddle_right, balls: balls});
       start();
     }
     else if (mode === "multiplayer") {
-      console.log("multiplayer");
       if (player_left === null) {
-        console.log("first player");
         var paddle_left = Paddle("left");
         player_left = Player({socket : socket, paddle: paddle_left});
       }
       else {
-        console.log("second player");
         var paddle_right = Paddle("right");
         player_right = Player({socket : socket, paddle: paddle_right});
         start();
       }
-
     }
-
   };
 
   var _stop = function () {
-    console.log("stopping game");
     clearInterval(game_loop);
-    sendToPlayers("quit", {data : "someone quit"});
-  }
+  };
 
   return {
     addPlayer : addPlayer,
     stop : _stop
   };
-
 
 };
 
