@@ -2,7 +2,7 @@ constants = require('./constants');
 
 module.exports = function (option) {
     var top = option.top;
-    var bottom = option.bottom;
+    var left = option.left;
     var visable = true;
 
     return {

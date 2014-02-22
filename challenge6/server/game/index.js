@@ -43,7 +43,7 @@ module.exports = function(options) {
     blocks_data = [];
 
     for (var i = blocks.length - 1; i >= 0; i--) {
-      blocks_data.add({
+      blocks_data.push({
         x : blocks[i].left(),
         y : blocks[i].top(),
         width : blocks[i].width(),
@@ -87,7 +87,7 @@ module.exports = function(options) {
 
     for (var i = blocks.length - 1; i >= 0; i--) {
       var bl = blocks[i];
-      if (bl.collide(ball)) {
+      if (bl.collides(ball)) {
         bl.hide();
         ball.hitBlock();
       }
@@ -102,7 +102,7 @@ module.exports = function(options) {
   // Main loop.
   function start() {
     console.log("start")
-    blocks.add( new Block({top : 150, left : 250}));
+    blocks.push( new Block({top : 150, left : 250}));
     game_loop = setInterval(function() {
       if (player_left === null) return;
       updateGame();
