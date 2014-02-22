@@ -97,6 +97,9 @@ body {
 }
 
 .scores {
+  position: relative;
+  z-index: 1;
+  top: -240;
   color: white;
   padding: 30px;
   padding-top: 0;
