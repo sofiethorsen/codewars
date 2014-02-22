@@ -44,14 +44,14 @@ function Ball(node, paddleHitCallback) {
     var o = node.overlaps(paddle.node);
     if (o.targets.length > 0) {
 
-      var top_ball = node.position().top;
-      var top_paddle = paddle.node.position().top - node.height();
+      var middle_ball = node.position().top + node.height() / 2;
+      var top_paddle = paddle.node.position().top - node.height() / 2;
+      var paddle_height = paddle.node.height() + node.height();
 
-      var diff = top_paddle-top_ball;
-      diff = diff*-1;
-      var section = diff % (paddle.node.height() / 8);
+      var intersection = middle_ball - top_paddle;
 
-      var move = (section - 3) / 3
+      var section = Math.round(intersection / (paddle_height / 8));
+      var move = (section - 4) / 6;
 
       if (move < 0) {
         speedX += speedY * -move;
@@ -62,7 +62,7 @@ function Ball(node, paddleHitCallback) {
       }
 
 
-      console.log("DIFF", move);
+      console.log("DIFF", section);
 
 
 
