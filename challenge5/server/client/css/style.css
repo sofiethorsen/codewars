@@ -79,8 +79,10 @@ body {
 }
 
 #waiting {
+  position: relative;
+  z-index: 1;
+  top: -15;
   text-align: center;
-  padding-top: 220px;
   color: white;
 }
 
