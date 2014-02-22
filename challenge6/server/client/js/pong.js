@@ -45,18 +45,25 @@ var Paddle = function(node) {
 
 function refresh(data) {
     function _redrawBlocks(blocks) {
-        gameDiv = document.getElementById('game');
-        var blockDiv = document.getElementById('blocks');
+        //gameDiv = document.getElementById('game');
+        //var blockDiv = document.getElementById('blocks');
 
-        gameDiv.removeChild(blockDiv)
-        blockDiv.parentNode.removeChild(blockDiv)
+        $("#game").remove(".block");
 
-        var new_blocksDiv = document.createElement('div');
-        blocksDiv.id = 'blocks';
-        document.getElementsByTagName('game')[0].appendChild(blocksDiv);
+        //gameDiv.removeChild(blockDiv)
+        //blockDiv.parentNode.removeChild(blockDiv)
+
+        //var new_blocksDiv = document.createElement('div');
+        //blocksDiv.id = 'blocks';
+        //document.getElementsByTagName('game')[0].appendChild(blocksDiv);
 
         blocks.forEach(function(block){
-            $(block.name).css({top: block.top, left: block.left, width: block.width, height: block.height});
+            if (block.visable) {
+                var elem = $('<div class="block"/>');
+                elem.css({top: block.y, left: block.x, width: block.width, height: block.height});
+                //$(block.name).css({top: block.top, left: block.left, width: block.width, height: block.height});
+                $("#game").append(elem);
+            }
         });
     };
 

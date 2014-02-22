@@ -90,10 +90,11 @@ body {
 .blocks {
 }
 
-.block1 {
+.block {
   background-color: red;
-  height: 10px;
-  width: 5px;
+  height: 100px;
+  width: 500px;
+  position: absolute;;
 }
 
 .hide {
