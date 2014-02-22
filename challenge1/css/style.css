@@ -17,6 +17,15 @@ body {
   position: relative;
 }
 
+#message {
+  display: none;
+  position: absolute;
+  font-size: 50px;
+  top: 220px;
+  left: 310px;
+  color: white;
+}
+
 #divider {
   position: absolute;
   top: 0;
