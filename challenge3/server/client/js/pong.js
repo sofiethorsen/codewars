@@ -64,10 +64,10 @@ function refresh(player, data) {
     var left = data.paddle_left;
     var right = data.paddle_right;
 
-    console.log(ball);
+    console.log(left);
     $("#ball").css({top: ball.y, left: ball.x});
-    $("#left").css({top: left.y, left: right.x});
-    $("#right").css({top: right.y, left: left.x});
+    $("#left").css({top: left.y, left: left.x});
+    $("#right").css({top: right.y, left: right.x});
 };
 
 $(document).ready(function() {

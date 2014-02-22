@@ -88,7 +88,7 @@ function Paddle(side) {
             return PADDLE_HEIGHT;
         },
         setDirection: function(dir) {
-            
+
             if (dir === "up") {
                 direction = -1;
             } else if (dir === "down") {
@@ -101,7 +101,7 @@ function Paddle(side) {
         },
         update: function() {
             top += direction * PADDLE_SPEED;
-            top = Math.min(500 - this.height(), top);
+            top = Math.max(Math.min(500 - this.height(), top), 0);
         },
         top: function() { return top; },
         bottom: function() { return top + PADDLE_HEIGHT; },
@@ -176,5 +176,5 @@ function updateGame() {
 setInterval(function() {
   if (player === null) return;
   updateGame();
-  
+
 }, 300);
