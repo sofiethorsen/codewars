@@ -52,6 +52,7 @@ Player = function(options) {
 
     return {
         direction: _direction,
+        name: NAME,
         score: _score,
         updateScore: _updateScore,
         paddle: options.paddle,
@@ -79,12 +80,32 @@ function updatePlayer(player) {
     }
 }
 
+function haveWinner() {
+    var winScore = 10;
+    var winner = false;
+    var message = $('#message');
+
+    if(player1.score() == winScore) {
+        console.log('player1 wins');
+        message.removeClass('hide');
+        message.html(player1.name.toUpperCase() + ' WINS!');
+        return true;
+    } else if(player2.score() == winScore) {
+        console.log('player2 wins');
+        message.removeClass('hide');
+        message.html(player2.name.toUpperCase() + ' WINS!');
+        return true;
+    };
+
+    return winner;
+}
+
 $(document).ready(function() {
     paddle_left = Paddle($("#left"));
     paddle_right = Paddle($("#right"));
 
-    player1 = Player({name: 'gustaf', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}); // a - up, z - down
-    player2 = Player({name: 'klas', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}); // up/down arrows
+    player1 = Player({name: 'Player 1', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}); // a - up, z - down
+    player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}); // up/down arrows
 
     var ball = Ball($("#ball"), function (side) {
         if(side == 'left') {
@@ -95,12 +116,14 @@ $(document).ready(function() {
     });
 
     window.requestAnimationFrame(function loop(time) {
-        updatePlayer(player1);
-        updatePlayer(player2);
-        ball.update();
+        if(!haveWinner()) {
+            updatePlayer(player1);
+            updatePlayer(player2);
+            ball.update();
 
-        ball.collied(paddle_left);
-        ball.collied(paddle_right);
+            ball.collied(paddle_left);
+            ball.collied(paddle_right);
+        };
 
         window.requestAnimationFrame(loop);
     });
