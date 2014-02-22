@@ -35,7 +35,7 @@ module.exports = function (options) {
   };
 
   var hitBlock = function(block) {
-    var middle_ball = this.top() + this.height() / 2;
+    /*var middle_ball = this.top() + this.height() / 2;
     var block_middle = block.top() + block.height() / 2;
 
     var intersection = middle_ball - block_middle;
@@ -43,7 +43,7 @@ module.exports = function (options) {
     var section = Math.round(intersection / (block.height() / 8));
     var move = (section - 4) / 3;
 
-    speedY = move * Math.abs(speedX);
+    speedY = move * Math.abs(speedX);*/
 
     speedX = -speedX;
   };
