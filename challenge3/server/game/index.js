@@ -65,7 +65,7 @@ function Bot(options) {
 
   return {
     direction : _direction,
-    update : _update;
+    update : _update
   }
 
 }
