@@ -1,12 +1,17 @@
-function Ball(node) {
+function Ball(node, paddleHitCallback) {
 
 
   var speed = 10;
   var speedX = 13;
   var speedY = 37;
-  var o = node.position();  
+  var o = node.position();
   var x = o.left;
   var y = o.top;
+
+  var reset = function() {
+    x = 500;
+    y = 250;
+  };
 
   var get = function () {
     return node.position();
@@ -26,16 +31,19 @@ function Ball(node) {
     y = limit(y + speedY, 0, 500-node.height());
 
     if (y === 0) {
-      speedY = -speedY
+      speedY = -speedY;
     }
     if (y === 500-node.height()) {
-      speedY = -speedY
+      speedY = -speedY;
     }
-
-    if ((x == 0) ||x === (1000-node.width())) {
+    if (x === 0) {
+      paddleHitCallback("left");
       hitPaddle(); //TODO: Report thingy
     }
-
+    if (x === (1000-node.width())) {
+      paddleHitCallback("right");
+      hitPaddle(); //TODO: Report thingy
+    }
     node.css({top: y, left: x}); //Update the nodes position
   };
 

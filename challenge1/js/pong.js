@@ -82,18 +82,17 @@ $(document).ready(function() {
     player1 = Player({name: 'klas', keyUp: 38, keyDown: 40, paddle: paddle_left}); // up/down arrows
     player2 = Player({name: 'gustaf', keyUp: 65, keyDown: 90, paddle: paddle_right}); // a - up, z - down
 
+    var ball = Ball($("#ball"), function (side) {
+        console.log("hit " + side);
+    });
+   
     window.requestAnimationFrame(function loop(time) {
         updatePlayer(player1);
         updatePlayer(player2);
+        ball.update();
 
         window.requestAnimationFrame(loop);
     });
-
-    var ball = Ball($("#ball"));
-
-    setInterval(function () {
-        ball.update();
-    }, 100);
 });
 
 
