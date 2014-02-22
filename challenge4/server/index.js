@@ -17,5 +17,7 @@ app.get('/', function (req, res) {
 });
 
 io.sockets.on('connection', function (socket) {
-  game.setPlayer(socket);
+  g = game("singleplayer");
+
+  g.addPlayer(socket);
 });
