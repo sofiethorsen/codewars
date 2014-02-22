@@ -6,7 +6,6 @@ body {
 }
 
 #frame {
-  background-color: rgba(255, 0, 0, 0);
   width: 520px;
   height: 550px;
   top: 50px;
@@ -49,7 +48,7 @@ body {
 #divider {
   position: absolute;
   z-index: 2;
-  top: -150;
+  top: 0;
   left: 260px;
   width: 1px;
   height: 550px;
@@ -58,10 +57,9 @@ body {
 
 #menu {
   z-index: 1;
-  top: 140;
+  top: -15;
   position: relative;
   text-align: center;
-  padding-top: 80px;
   color: white;
 }
 
