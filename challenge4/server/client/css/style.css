@@ -35,14 +35,27 @@ body {
 }
 
 #menu {
-  position: relative;
-  width: 1000px;
-  height: 500px;
+  color: white;
+}
+
+#menu * {
+  padding: 5px;
+}
+
+#menu div {
+  width: 200px;
+  height: 200px;
+  padding-top: 200px;
   margin-left: auto;
   margin-right: auto;
-  color: white;
-  top: 55px;
-  left: 435px;
+}
+
+#waiting {
+  display: none;
+}
+
+#game {
+  display: none
 }
 
 .hide {
