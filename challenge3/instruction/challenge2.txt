@@ -1,0 +1,7 @@
+Now create two automatic 'bot' players that can play pong together.
+
+1) A bot player should only be able to move three times a second and at most 1/10 of the height of the short-end side at a time.
+
+2) First try out your bot player to play against a human keyboard player. 
+
+3) Then make it possible to let two bots play against each other. 
