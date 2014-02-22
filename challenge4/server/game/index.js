@@ -24,6 +24,17 @@ module.exports = function(options) {
     }
   });
 
+  function sendToPlayers (evt, data) {
+
+    if (player_left.socket !== null && player_left.socket !== undefined) {
+      player_left.socket.emit(evt, data);
+    }
+    if (player_right.socket !== null && player_right.socket !== undefined) {
+      player_right.socket.emit(evt, data);
+    }
+
+  }
+
   function sendState() {
     data = {
       ball : {
@@ -41,12 +52,8 @@ module.exports = function(options) {
       score_left : player_left.getScore(),
       score_right : player_right.getScore()
     };
-    if (player_left.socket !== null && player_left.socket !== undefined) {
-      player_left.socket.emit('update', data);
-    }
-    if (player_right.socket !== null && player_right.socket !== undefined) {
-      player_right.socket.emit('update', data);
-    }
+
+    sendToPlayers("update", data);
   }
 
   function updateGame() {
@@ -106,6 +113,7 @@ module.exports = function(options) {
   var _stop = function () {
     console.log("stopping game");
     clearInterval(game_loop);
+    sendToPlayers("quit", {data : "someone quit"});
   }
 
   return {
