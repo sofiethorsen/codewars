@@ -97,11 +97,11 @@ module.exports = function (options) {
     //   speedY = -speedY;
 
 
-    if (x === 0) {
+    if (x < 0) {
       resetBall();
       callback("left");
     }
-    if (x === (constants.WIDTH-this.width())) {
+    if (x > (constants.WIDTH-this.width())) {
       resetBall();
       callback("right");
     }
