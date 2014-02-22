@@ -7,6 +7,9 @@ Paddle = require('./paddle');
 
 
 module.exports = function(type) {
+
+  var player_left = null;
+  var player_right = null;
   var ball = Ball({
     callback: function(direction) {
       if (direction === "right") {
@@ -19,8 +22,7 @@ module.exports = function(type) {
   });
 
 
-  var player_left = null;
-  var player_right = null;
+
 
   function resetGame (socket) {
     var paddle_left = Paddle("left");
@@ -30,9 +32,7 @@ module.exports = function(type) {
     player_right = Bot({paddle: paddle_right, ball: ball});
   }
 
-  addPlayer = function(socket) {
-    resetGame(socket);
-  };
+
 
 
   function sendState() {
@@ -52,8 +52,12 @@ module.exports = function(type) {
       score_left : player_left.getScore(),
       score_right : player_right.getScore()
     }
-
-    player_left.socket.emit('update', data);
+    if (player_left.socket !== null && player_left.socket !== undefined) {
+      player_left.socket.emit('update', data);  
+    }
+    if (player_right.socket !== null && player_right.socket !== undefined) {
+      player_right.socket.emit('update', data);  
+    }
   }
 
   function updateGame() {
@@ -80,6 +84,10 @@ module.exports = function(type) {
     updateGame();
   }, 50);
 
+
+  var addPlayer = function(socket) {
+    resetGame(socket);
+  };
 
   return {
     addPlayer : addPlayer
