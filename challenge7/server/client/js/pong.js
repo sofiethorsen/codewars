@@ -57,7 +57,7 @@ function refresh(data) {
 
     function _redrawBalls(balls) {
         $('div.ball').remove()
-        balls.forEach(function(balls){
+        balls.forEach(function(ball){
             var elem = $('<div class="ball"/>');
             elem.css({top: ball.y, left: ball.x});
             $("#game").append(elem);
