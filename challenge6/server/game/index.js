@@ -4,6 +4,7 @@ Player = require('./player');
 Bot = require('./bot');
 Paddle = require('./paddle');
 Block = require('./block');
+constants = require('./constants');
 
 
 
@@ -89,7 +90,7 @@ module.exports = function(options) {
       var bl = blocks[i];
       if (bl.collides(ball)) {
         bl.hide();
-        ball.hitBlock();
+        ball.hitBlock(bl);
       }
     };
 
@@ -103,6 +104,9 @@ module.exports = function(options) {
   function start() {
     console.log("start")
     blocks.push( new Block({top : 150, left : 250}));
+    for (var i = 0; i < 5; i++) {
+      blocks.push( new Block({top : 150 + (constants.BLOCK_HEIGHT + 10) * i, left : 250}));
+    }
     game_loop = setInterval(function() {
       if (player_left === null) return;
       updateGame();
@@ -131,7 +135,7 @@ module.exports = function(options) {
         player_right = Player({socket : socket, paddle: paddle_right});
         start();
       }
-      
+
     }
 
   };
