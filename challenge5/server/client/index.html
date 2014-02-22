@@ -1,0 +1,35 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="js/pong.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost');
+  </script>
+</head>
+<body>
+  <div id="frame">
+    <div id="menu">
+      <div>
+        <div class="entry" id="singleplayer">SINGLEPLAYER</div>
+        <div class="entry" id="multiplayer">MULTIPLAYER</div>
+      </div>
+    </div>
+    <div id="waiting" class="hide">
+      WAITING...
+    </div>
+    <div id="game" class="hide">
+      <div id="message" class="hide"></div>
+      <div id="divider"></div>
+    	<div class="scores">
+    		<span class="left-scoreboard">0</span><span class="right-scoreboard">0</span>
+    	</div>
+      <div class="paddle" id="left"></div>
+      <div class="paddle" id="right"></div>
+      <div id="ball"></div>
+    </div>
+  </div>
+
+</body>
+</html>
