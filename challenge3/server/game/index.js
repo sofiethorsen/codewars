@@ -8,9 +8,6 @@ var PADDLE_WIDTH = 20;
 var PADDLE_HEIGHT = 50;
 var PADDLE_SPEED = 10;
 
-var paddle_left = Paddle("left");
-var paddle_right = Paddle("right");
-
 var ball = Ball();
 
 function Player(options) {
@@ -46,13 +43,13 @@ function Bot(options) {
         return; //yield
     }
 
-    var paddle = player.paddle;
-
     var paddle_mid = paddle.top() + paddle.height()/2;
     var ball_mid = ball.top() + ball.height()/2;
-    var move = ball_mid-paddle_mid; // + ball.ySpeed() * (60 / 3);
+    var move = ball_mid - paddle_mid; // + ball.ySpeed() * (60 / 3);
 
+    console.log(ball_mid, paddle_mid);
     move = Math.min(Math.max(move, -max_move), max_move);
+
 
     if (move < 0) {
       _direction = "up";
@@ -128,6 +125,9 @@ var player = null;
 var bot = null;
 
 function resetGame (socket) {
+  var paddle_left = Paddle("left");
+  var paddle_right = Paddle("right");
+
   player = Player({socket : socket, paddle: paddle_left});
   bot = Bot({paddle: paddle_right, ball: ball});
 }
@@ -145,12 +145,12 @@ function sendState() {
       y: ball.top()
     },
     paddle_left : {
-      x: paddle_left.left(),
-      y: paddle_left.top()
+      x: player.paddle.left(),
+      y: player.paddle.top()
     },
     paddle_right : {
-      x: paddle_right.left(),
-      y: paddle_right.top()
+      x: bot.paddle.left(),
+      y: bot.paddle.top()
     }
   }
 
@@ -163,11 +163,11 @@ function updateGame() {
 
   ball.update();
 
-  paddle_left.setDirection(player.direction());
-  paddle_right.setDirection(bot.direction());
+  player.paddle.setDirection(player.direction());
+  bot.paddle.setDirection(bot.direction());
 
-  paddle_left.update();
-  paddle_right.update();
+  player.paddle.update();
+  bot.paddle.update();
 
   sendState();
 }
