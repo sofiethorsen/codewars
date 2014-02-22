@@ -4,7 +4,7 @@ module.exports = function (option) {
     var top = option.top;
     var left = option.left;
     var visible = true;
-    var special = Math.random() <= 0.2;
+    var special = true; //Math.random() <= 0.2;
 
     return {
         height: function() { return constants.BLOCK_HEIGHT;},
