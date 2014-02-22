@@ -1,7 +1,7 @@
 var express = require('express');
 
 
-var game = require('./game');
+var game = require('./game/index.js');
 
 var app = express()
   , server = require('http').createServer(app)

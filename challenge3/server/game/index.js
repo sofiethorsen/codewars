@@ -1,14 +1,14 @@
 console.log("game start");
 
 var state;
+var player = null;
 
-function resetGame (argument) {
-  // body...
+function resetGame (socket) {
+  player = {socket : socket };
 }
 
 exports.setPlayer = function(socket) {
-
-  resetGame();
+  resetGame(socket);
 
   
   // data.id, data.direction
@@ -24,6 +24,7 @@ function updateGame() {
 
 // Main loop.
 setInterval(function() {
+  if (player === null) return;
   updateGame();
-  socket.emit('update', state);
+  player.socket.emit('update', state);
 }, 1000);
