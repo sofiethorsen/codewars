@@ -53,11 +53,11 @@ body {
   font-size: 40px;
 }
 
-.scores .player1 {
+.scores .left-scoreboard {
   float: left;
 }
 
-.scores .player2 {
+.scores .right-scoreboard {
   float: right;
 }
 

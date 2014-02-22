@@ -1,11 +1,13 @@
 lib = require('./lib');
 var WIDTH = 1000;
 var HEIGHT = 500;
-module.exports = function (argument) {
+module.exports = function (options) {
   var BALL_WIDTH = 25;
   var BALL_HEIGHT = 25;
 
+  var callback = options.callback;
   var speedX, speedY, x, y;
+  var latestHit = null;
 
   function resetBall() {
     x = 500;
@@ -15,6 +17,8 @@ module.exports = function (argument) {
     // Speed should be at least 5
     speedX =+ lib.sign(speedX) * 5;
     speedY =+ lib.sign(speedY) * 5;
+    latestHit = null;
+
   };
   resetBall();
 
@@ -34,6 +38,17 @@ module.exports = function (argument) {
   var _get = function() {
     return { x: x, y: y };
   };
+  
+  var collide = function(paddle) {
+    if (latestHit === paddle) {
+      return;
+    }
+    if (paddle.collides(this)) {
+      hitPaddle();
+
+      latestHit = paddle;
+    }
+  };
 
   var _update = function () {
     x = lib.limit(x + speedX, 0, WIDTH-BALL_WIDTH);
@@ -45,15 +60,16 @@ module.exports = function (argument) {
 
     if (x === 0) {
       resetBall();
-      console.log("someone lost")
+      callback("left");
     }
     if (x === (WIDTH-BALL_WIDTH)) {
       resetBall();
-      console.log("someone lost")
+      callback("right");
     }
   };
 
   return {
+    resetBall: resetBall,
     get: _get,
     update: _update,
     top: top,
@@ -61,6 +77,7 @@ module.exports = function (argument) {
     right: right,
     bottom: bottom,
     width: width,
-    height: height
+    height: height,
+    collide: collide
   };
 }
