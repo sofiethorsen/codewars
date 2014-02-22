@@ -1,32 +1,19 @@
 module.exports = function (options) {
   var paddle = options.paddle;
   var socket = options.socket;
-  var _direction = "none";
-
-  socket.on('paddleMove', function (data) {
-    _direction = data.direction;
-  });
-
+  var direction = "none";
   var score = 0;
 
-  var addScore = function() {
-    score++;
-  };
-
-  var getScore = function() {
-    return score;
-  };
-
-  _update = function(time) {};
-
-  var direction = function () { return _direction }
+  socket.on('paddleMove', function (data) {
+    direction = data.direction;
+  });
 
   return {
-    direction : direction,
-    update : _update,
+    direction : function () { return direction;},
+    update : function(time) {},
     paddle: paddle,
     socket: socket,
-    getScore: getScore,
-    addScore: addScore
+    getScore: function() { return score;},
+    addScore: function() {score++;}
   }
 }

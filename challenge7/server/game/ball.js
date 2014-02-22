@@ -39,25 +39,13 @@ module.exports = function (options) {
   var hitBlock = function(block) {
     var middle_ball = this.left() + this.width() / 2;
     var block_middle = block.left() + block.width() / 2;
-/*
-    var intersection = middle_ball - block_middle;
-
-    var section = Math.round(intersection / (block.height() / 8));
-    var move = (section - 4) / 3;
-
-    speedY = move * Math.abs(speedX);*/
 
     if (speedY > speedX) {
       speedY = -speedY;
     } else {
       speedX = -speedX;
     }
-/*
-    if (middle_ball < block_middle) {
-      x = block_middle - this.width() / 2;
-    } else {
-      x = block_middle + this.width() / 2;
-    }*/
+
   };
 
   var _get = function() {
@@ -108,10 +96,6 @@ module.exports = function (options) {
 
     var incoming = degree(speedX, speedY);
     var l = length(speedX, speedY);
-
-    //v = vector(d, l);
-
-    //console.log(x, y, v);
 
     var ball_mid_x = x + this.width()/2;
     var ball_mid_y = y + this.height()/2;

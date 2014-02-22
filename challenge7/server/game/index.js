@@ -51,9 +51,8 @@ module.exports = function(options) {
   }
 
   function sendState() {
-
-
-    blocks_data = [];
+    var blocks_data = [];
+    var balls_data = [];
 
     for (var i = blocks.length - 1; i >= 0; i--) {
       blocks_data.push({
@@ -66,7 +65,6 @@ module.exports = function(options) {
       })
     };
 
-    balls_data = [];
     for (var i = balls.length - 1; i >= 0; i--) {
       balls_data.push({
         x : balls[i].left(),
@@ -93,12 +91,15 @@ module.exports = function(options) {
   }
 
   function updateGame() {
+    // Update the player
     player_left.update();
     player_right.update();
     player_left.paddle.setDirection(player_left.direction());
     player_right.paddle.setDirection(player_right.direction());
+    player_left.paddle.update();
+    player_right.paddle.update();
 
-
+    // Check blocks and balls
     for (var i = balls.length - 1; i >= 0; i--) {
       balls[i].update();
       if (balls[i] === undefined || balls[i] == null) return;
@@ -117,9 +118,7 @@ module.exports = function(options) {
       };
     };
 
-    player_left.paddle.update();
-    player_right.paddle.update();
-
+    // Ship it!
     sendState();
   }
 
