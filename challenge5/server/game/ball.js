@@ -72,17 +72,20 @@ module.exports = function (options) {
     }
   }
 
+  var toRad = function(degrees) {
+    return degrees * (Math.PI/180);
+  }
+
   var _update = function () {
     x += speedX;
     y += speedY;
 
+    var incoming = degree(speedX, speedY);
+    var l = length(speedX, speedY);
 
-    d = degree(x, y);
-    l = length(x, y);
+    //v = vector(d, l);
 
-    v = vector(d, l);
-
-    console.log(x, y, v);
+    //console.log(x, y, v);
 
     var ball_mid_x = x + this.width()/2;
     var ball_mid_y = y + this.height()/2;
@@ -93,7 +96,13 @@ module.exports = function (options) {
     if (ball_mid_x < half) {
       var yTop = topLeftLine(ball_mid_x);
       if (ball_mid_y < yTop && latestLineHit !== "topLeftLine") {
-        speedY *= -1;
+        //speedY *= -1;
+        var outDeg = 2 * toRad(150) - toRad(180) - incoming;
+        var out = vector(outDeg, l);
+        speedX = out.x;
+        speedY = out.y;
+
+
         latestLineHit = "topLeftLine";
         console.log("collides topLeftLine");
       }
