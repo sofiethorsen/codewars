@@ -1,5 +1,5 @@
 unixTime = function() {
-    return Math.round(new Date().getTime() / 1000)
+    return Math.round(new Date().getTime());
 };
 
 Bot = function (options) {
@@ -10,7 +10,7 @@ Bot = function (options) {
 
 
     _move = function() {
-        if (unixTime - latest_move_at < 3) {
+        if (unixTime() - latest_move_at < 333) {
             return; //yield
         }
 
