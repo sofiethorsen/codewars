@@ -1,6 +1,7 @@
 lib = require('./lib');
-var WIDTH = 1000;
+
 var HEIGHT = 500;
+var WIDTH = 700;
 module.exports = function (options) {
   var BALL_WIDTH = 25;
   var BALL_HEIGHT = 25;
@@ -50,13 +51,62 @@ module.exports = function (options) {
     }
   };
 
-  var _update = function () {
-    x = lib.limit(x + speedX, 0, WIDTH-BALL_WIDTH);
-    y = lib.limit(y + speedY, 0, HEIGHT-BALL_HEIGHT);
+  var GAME_AREA_TOP = 100;
+  var GAME_AREA_BOTTOM = 400;
+  
 
-    if (y === 0 || y === HEIGHT-BALL_HEIGHT) {
-      speedY = -speedY;
+  var topLeftLine     = function(x) { return GAME_AREA_TOP    + -3*x; };
+  var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + 3*x; };
+  
+  var toprightLine    = function(x) { return GAME_AREA_TOP    + -3*(WIDTH-x); };
+  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + 3*(WIDTH-x); };
+
+    
+
+  var _update = function () {
+    x += speedX;
+    y += speedY;
+
+    var ball_mid_x = x + this.width()/2;
+    var ball_mid_y = y + this.height()/2;
+
+    var half = WIDTH/2;
+
+    // Left half
+    if (ball_mid_x < half) {
+      var yTop = topLeftLine(ball_mid_x);
+      if (ball_mid_y < yTop) {
+        speedX = 0
+        speedY = 0
+        console.log("collides");
+      }
+      var yBot = bottomLeftLine(ball_mid_x);
+      if (ball_mid_y > yBot) {
+        speedX = 0
+        speedY = 0
+        console.log("collides");
+      }
     }
+    // Right half
+    else {
+      var yTop = toprightLine(ball_mid_x);
+      if (ball_mid_y < yTop) {
+        speedX = 0
+        speedY = 0
+        console.log("collides");
+      }
+      var yBot = bottomrightLine(ball_mid_x);
+      if (ball_mid_y > yBot) {
+        speedX = 0
+        speedY = 0
+        console.log("collides");
+      }
+    }
+
+
+    // if (y === 0 || y === HEIGHT-BALL_HEIGHT) {
+    //   speedY = -speedY;
+
 
     if (x === 0) {
       resetBall();

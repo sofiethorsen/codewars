@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
 
 
 
-
+io.set('log level', 0); // reduce logging
 
 var waiting_game = null;
 io.sockets.on('connection', function (socket) {
