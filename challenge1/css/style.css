@@ -37,7 +37,7 @@ body {
 
 .paddle {
   width: 20px;
-  height: 80px;
+  height: 50px;
   background-color: white;
   position: absolute;;
   top: 30px;

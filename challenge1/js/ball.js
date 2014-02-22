@@ -36,8 +36,31 @@ function Ball(node, paddleHitCallback) {
   var collied = function(paddle) {
     var o = node.overlaps(paddle.node);
     if (o.targets.length > 0) {
+
+      var top_ball = node.position().top;
+      var top_paddle = paddle.node.position().top + node.height();
+
+      // var top = top_paddle ;
+
+
+
+      // var bottom = top_paddle - paddle.node.height();
+
+
+
+      
+
+
+
+      var diff = top_paddle-top_ball;
+
+      console.log("DIFF", top_paddle, top_ball, diff)
+
+
+
       hitPaddle();
       update();
+
     }
   };
 
