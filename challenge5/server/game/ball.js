@@ -51,8 +51,8 @@ module.exports = function (options) {
     }
   };
 
-  var GAME_AREA_TOP = 100;
-  var GAME_AREA_BOTTOM = 400;
+  var GAME_AREA_TOP = 150;
+  var GAME_AREA_BOTTOM = 300;
   
 
   var topLeftLine     = function(x) { return GAME_AREA_TOP    + -3*x; };
@@ -78,13 +78,13 @@ module.exports = function (options) {
       if (ball_mid_y < yTop) {
         speedX = 0
         speedY = 0
-        console.log("collides");
+        console.log("collides topLeftLine");
       }
       var yBot = bottomLeftLine(ball_mid_x);
       if (ball_mid_y > yBot) {
         speedX = 0
         speedY = 0
-        console.log("collides");
+        console.log("collides bottomLeftLine");
       }
     }
     // Right half
@@ -93,13 +93,13 @@ module.exports = function (options) {
       if (ball_mid_y < yTop) {
         speedX = 0
         speedY = 0
-        console.log("collides");
+        console.log("collides toprightLine");
       }
       var yBot = bottomrightLine(ball_mid_x);
       if (ball_mid_y > yBot) {
         speedX = 0
         speedY = 0
-        console.log("collides");
+        console.log("collides bottomrightLine");
       }
     }
 
