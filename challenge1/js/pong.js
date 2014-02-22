@@ -56,7 +56,7 @@ Player = function(options) {
         updateScore: _updateScore,
         paddle: options.paddle,
     };
-}
+};
 
 var Paddle = function(node) {
     return {
@@ -66,9 +66,10 @@ var Paddle = function(node) {
             o.top = Math.max(0, o.top);
             o.top = Math.min(500 - node.height(), o.top);
             node.css(o);
-        }
+        },
+        node: node
     };
-}
+};
 
 function updatePlayer(player) {
     if (player.direction() > 0) {
@@ -93,6 +94,9 @@ $(document).ready(function() {
         updatePlayer(player1);
         updatePlayer(player2);
         ball.update();
+
+        ball.collied(paddle_left);
+        ball.collied(paddle_right);
 
         window.requestAnimationFrame(loop);
     });

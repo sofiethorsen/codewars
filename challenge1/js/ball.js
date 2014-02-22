@@ -6,7 +6,7 @@ function Ball(node, paddleHitCallback) {
   var x = o.left;
   var y = o.top;
 
-  var reset = function() {
+  var resetPosition = function() {
     x = 500;
     y = 250;
   };
@@ -24,6 +24,12 @@ function Ball(node, paddleHitCallback) {
     return Math.max(Math.min(current, max), min);
   };
 
+  var collied = function(paddle) {
+    var o = node.overlaps(paddle.node);
+    if (o.targets.length > 0)
+      hitPaddle();
+  }; 
+
   var update = function () {
     x = limit(x + speedX, 0, 1000-node.width());
     y = limit(y + speedY, 0, 500-node.height());
@@ -36,11 +42,11 @@ function Ball(node, paddleHitCallback) {
     }
     if (x === 0) {
       paddleHitCallback("left");
-      hitPaddle(); //TODO: Report thingy
+      resetPosition();
     }
     if (x === (1000-node.width())) {
       paddleHitCallback("right");
-      hitPaddle(); //TODO: Report thingy
+      resetPosition();
     }
     node.css({top: y, left: x}); //Update the nodes position
   };
@@ -48,6 +54,7 @@ function Ball(node, paddleHitCallback) {
   return {
     get : get,
     hitPaddle : hitPaddle,
-    update : update
+    update : update,
+    collied : collied
   };
 };
