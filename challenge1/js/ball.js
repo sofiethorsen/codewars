@@ -1,9 +1,23 @@
+function sign(x) {
+    return typeof x === 'number' ? x ? x < 0 ? -1 : 1 : x === x ? 0 : NaN : NaN;
+}
+
+function random() {
+  return (Math.random() - 0.5) * 2;
+}
+
 function Ball(node, paddleHitCallback) {
 
-  var speedX = 7;
-  var speedY = 7;
+  var speedX = random() * 5;
+  var speedY = random() * 5;
+  // Speed should be at least 5
+  speedX =+ sign(speedX) * 5;
+  speedY =+ sign(speedY) * 5;
+
   var x = node.position().left;
-  var y = node.position().top;
+  var y = 100 + Math.random() * 300;
+
+  node.position().top = y;
 
   var resetPosition = function() {
     x = 500;
@@ -25,7 +39,7 @@ function Ball(node, paddleHitCallback) {
       hitPaddle();
       update();
     }
-  }; 
+  };
 
   var update = function () {
     x = limit(x + speedX, 0, 1000-node.width());
