@@ -1,3 +1,34 @@
+unixTime = function() {
+    return Math.round(new Date().getTime() / 1000)
+};
+
+Bot = function (options) {
+    var paddle = options.paddle;
+    var ball = options.ball;
+    var max_move = 50;
+    var latest_move_at = unixTime();
+
+
+    _move = function() {
+        if (unixTime - latest_move_at < 3) {
+            return; //yield
+        }
+
+        var paddle_mid = paddle.node.position().top + paddle.node.height()/2;
+        var ball_mid = ball.node.position().top + ball.node.height()/2;
+        var move = paddle_mid-ball_mid;
+
+        move = Math.max(Math.min(move, -max_move), max_move);
+
+        paddle.move(move);
+
+
+        latest_move_at = unixTime();
+    };
+
+
+}
+
 Player = function(options) {
     var NAME = options.name;
     var KEY_UP = options.keyUp;
@@ -106,7 +137,7 @@ $(document).ready(function() {
 
     player1 = Player({name: 'Player 1', keyUp: 38, keyDown: 40, paddle: paddle_right, scoreBoard: $('.player1')}); // a - up, z - down
     player2 = Player({name: 'Player 2', keyUp: 65, keyDown: 90, paddle: paddle_left, scoreBoard: $('.player2')}); // up/down arrows
-
+    
     var ball = Ball($("#ball"), function (side) {
         if(side == 'left') {
             player2.updateScore();
@@ -114,6 +145,8 @@ $(document).ready(function() {
             player1.updateScore();
         };
     });
+
+    bot = Bot({paddle : paddle_right, ball : ball});
 
     window.requestAnimationFrame(function loop(time) {
         if(!haveWinner()) {
