@@ -52,10 +52,10 @@ module.exports = function (options) {
   var GAME_AREA_TOP = 150;
   var GAME_AREA_BOTTOM = 400;
 
-  var topLeftLine     = function(x) { return GAME_AREA_TOP    + -(1/3)*x; };
-  var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + (1/3)*x; };
-  var toprightLine    = function(x) { return GAME_AREA_TOP    + -(1/3)*(constants.WIDTH-x); };
-  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + (1/3)*(constants.WIDTH-x); };
+  var topLeftLine     = function(x) { return GAME_AREA_TOP    + -(0.577)*x; };
+  var bottomLeftLine  = function(x) { return GAME_AREA_BOTTOM + (0.577)*x; };
+  var toprightLine    = function(x) { return GAME_AREA_TOP    + -(0.577)*(constants.WIDTH-x); };
+  var bottomrightLine = function(x) { return GAME_AREA_BOTTOM + (0.577)*(constants.WIDTH-x); };
 
 
   var _update = function () {
