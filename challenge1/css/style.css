@@ -2,6 +2,7 @@ body {
   background-color: black;
   padding: 0;
   margin: 0;
+  font-family: Monaco;
 }
 
 #frame {
@@ -22,6 +23,19 @@ body {
   background-color: white;
   position: absolute;;
   top: 30px;
+}
+
+.scores {
+  position: absolute;
+  left: 450px;
+  color: white;
+  font-size: 40px;
+}
+
+.scores .player1 {
+}
+
+.scores .player2 {
 }
 
 #left{
