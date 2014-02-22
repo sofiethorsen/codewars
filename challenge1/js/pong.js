@@ -81,7 +81,7 @@ function updatePlayer(player) {
 }
 
 function haveWinner() {
-    var winScore = 1;
+    var winScore = 10;
     var winner = false;
     var message = $('#message');
 
