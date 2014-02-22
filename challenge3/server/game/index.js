@@ -1,11 +1,12 @@
 lib = require('./lib');
+var WIDTH = 1000;
+var HEIGHT = 500;
+
 Ball = require('./ball');
 
 var PADDLE_WIDTH = 20;
 var PADDLE_HEIGHT = 50;
 var PADDLE_SPEED = 10;
-var WIDTH = 1000;
-var HEIGHT = 500;
 
 var paddle_left = Paddle("left");
 var paddle_right = Paddle("right");
@@ -151,6 +152,8 @@ function sendState() {
 function updateGame() {
   player.update();
   bot.update();
+
+  ball.update();
 
   paddle_left.setDirection(player.direction);
   paddle_right.setDirection(bot.direction);

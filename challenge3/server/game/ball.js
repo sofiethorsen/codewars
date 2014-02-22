@@ -1,5 +1,6 @@
 lib = require('./lib');
-
+var WIDTH = 1000;
+var HEIGHT = 500;
 module.exports = function (argument) {
   var BALL_WIDTH = 25;
   var BALL_HEIGHT = 25;
@@ -35,7 +36,7 @@ module.exports = function (argument) {
   };
 
   var _update = function () {
-    x = lib.limit(x + speedX, 0, WIDTH-BALL_WITH);
+    x = lib.limit(x + speedX, 0, WIDTH-BALL_WIDTH);
     y = lib.limit(y + speedY, 0, HEIGHT-BALL_HEIGHT);
 
     if (y === 0 || y === HEIGHT-BALL_HEIGHT) {
@@ -46,7 +47,7 @@ module.exports = function (argument) {
       resetBall();
       console.log("someone lost")
     }
-    if (x === (WIDTH-BALL_WITH)) {
+    if (x === (WIDTH-BALL_WIDTH)) {
       resetBall();
       console.log("someone lost")
     }
