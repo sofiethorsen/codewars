@@ -51,6 +51,7 @@ body {
 }
 
 #menu .entry:hover {
+  cursor: pointer;
   background-color: grey;
 }
 
